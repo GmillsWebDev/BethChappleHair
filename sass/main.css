@@ -954,7 +954,7 @@ main h2::after {
 }
 #ServicesPage #myTab {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 #ServicesPage #myTab .nav-item {
   width: 20%;
