@@ -417,7 +417,7 @@ if (! empty($_POST["send"])) {
                 </div>
               </div>
               <div class="location contactDetail">
-                <p>Please be aware that at the moment I have no availability for Saturday bookings but you are welcome to join the waitlist or book for another day.</p>
+                <!-- <p>Please be aware that at the moment I have no availability for Saturday bookings but you are welcome to join the waitlist or book for another day.</p> -->
                 <h3>Visit me</h3>
                 <br />
                 7-9 Heath Rd,<br />Petersfield<br />GU31 4JE
