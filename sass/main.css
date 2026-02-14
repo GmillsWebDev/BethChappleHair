@@ -743,6 +743,17 @@ main h2::after {
   content: "@";
   margin-right: 1rem;
 }
+
+.nonFormContact .online h3::before {
+  display: inline-block;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  font: var(--fa-font-solid);
+  font-size: 2rem;
+  content: "\f0109";
+  margin-right: 1rem;
+}
+
 .nonFormContact a {
   font-size: 1.1rem;
 }
