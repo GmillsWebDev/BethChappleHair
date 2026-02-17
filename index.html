@@ -1,4 +1,4 @@
-<?php
+<!-- <?php
 
 function strip_crlf($string)
 {
@@ -22,7 +22,7 @@ if (! empty($_POST["send"])) {
         // appending \r\n at the end of mailheaders for end
         $mailHeaders = "From: " . $name . "<" . $email . ">\r\n"; if
 (mail($toEmail, $subject, $content, $mailHeaders)) { $message = "Your message has been sent successfully. I will get back to you as soon as possible."; $type = "success"; } } } require_once
-"index.php"; ?>
+"index.html"; ?> -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -392,20 +392,20 @@ if (! empty($_POST["send"])) {
             <div class="nonFormContact">
               <div class="container">
                 <div class="row">
-                  <div class="col-sm-12 col-lg-4">
+                  <div class="col-sm-12 col-lg-6">
                     <div class="online contactDetail">
                       <h3>Book Online</h3>
                       <br>
                       <a href="https://bookings.gettimely.com/bethchapplehair/book" target="_blank">Book Now</a>
                     </div>
                   </div>
-                  <div class="col-sm-12 col-lg-4">
+                  <div class="col-sm-12 col-lg-6">
                     <div class="phone contactDetail">
                       <h3>Phone me</h3>
                       <br /><a href="tel:+447854441248">07854 441 248</a>
                     </div>
                   </div>
-                  <div class="col-sm-12 col-lg-4">
+                  <div class="col-sm-12 col-lg-6">
                     <div class="email contactDetail">
                       <h3>Email me</h3>
                       <br />
@@ -414,9 +414,8 @@ if (! empty($_POST["send"])) {
                       </a>
                     </div>
                   </div>
-                </div>
-              </div>
-              <div class="location contactDetail">
+                  <div class="col-sm-12 col-lg-6">
+                    <div class="location contactDetail">
                 <!-- <p>Please be aware that at the moment I have no availability for Saturday bookings but you are welcome to join the waitlist or book for another day.</p> -->
                 <h3>Visit me</h3>
                 <br />
@@ -425,7 +424,11 @@ if (! empty($_POST["send"])) {
                   You can find me in the Beautiful Normingtons Salon by the
                   Festival car park
                 </p>
-              </div>          
+              </div>
+                  </div>  
+                </div>
+              </div>
+                      
             </div>
           </div>
           <!-- <div class="col-sm-12 col-md-12 col-lg-4 homeMap">
