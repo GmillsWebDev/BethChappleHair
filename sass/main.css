@@ -709,6 +709,9 @@ main h2::after {
 
 .nonFormContact {
   padding: 0 2rem;
+  @media screen and (max-width: 768px) {
+    padding: 1rem 0;
+  }
 }
 .nonFormContact .contactDetail {
   margin: 1.5rem 0;
@@ -750,7 +753,7 @@ main h2::after {
   -webkit-font-smoothing: antialiased;
   font: var(--fa-font-solid);
   font-size: 2rem;
-  content: "\f0109";
+  content: "\f109";
   margin-right: 1rem;
 }
 
