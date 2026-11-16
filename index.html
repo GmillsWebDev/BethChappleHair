@@ -1,117 +1,123 @@
-<!-- <?php
-
-function strip_crlf($string)
-{
-    return str_replace("\r\n", "", $string);
-}
-
-if (! empty($_POST["send"])) {
-    $name = $_POST["userName"];
-    $email = $_POST["userEmail"];
-    $phone = $_POST["userPhone"];
-    $subject = $_POST["subject"];
-    $content = $_POST["content"];
-
-    $toEmail = "Bethchapplehairstylist@hotmail.com";
-    // CRLF Injection attack protection
-    $name = strip_crlf($name);
-    $email = strip_crlf($email);
-    if (! filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echo "The email address is invalid.";
-    } else {
-        // appending \r\n at the end of mailheaders for end
-        $mailHeaders = "From: " . $name . "<" . $email . ">\r\n"; if
-(mail($toEmail, $subject, $content, $mailHeaders)) { $message = "Your message has been sent successfully. I will get back to you as soon as possible."; $type = "success"; } } } require_once
-"index.html"; ?> -->
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
   <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-V801EGG6QR"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-V801EGG6QR');
-</script>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=6.0, minimum-scale=1.0"
-    />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Beth Chapple Hair | Hair Colour &amp; Cuts in Petersfield</title>
+    <meta name="description" content="Beth Chapple Hair: Petersfield hairdresser with 17+ years&#39; experience in natural colour, balayage, grey blending, fine and curly hair. Book online." />
+    <link rel="canonical" href="https://bethchapplehair.co.uk/" />
 
-    <title>Beth Chapple Hair</title>
-    <meta
-      name="description"
-      content="Beth Chapple Hair, based in Petersfield, Provides a friendly, personal but professional service it is the perfect place for colouring, styling, and bridal hair."
-    />
+    <!-- Social sharing -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Beth Chapple Hair" />
+    <meta property="og:locale" content="en_GB" />
+    <meta property="og:title" content="Beth Chapple Hair | Hair Colour &amp; Cuts in Petersfield" />
+    <meta property="og:description" content="Beth Chapple Hair: Petersfield hairdresser with 17+ years&#39; experience in natural colour, balayage, grey blending, fine and curly hair. Book online." />
+    <meta property="og:url" content="https://bethchapplehair.co.uk/" />
+    <meta property="og:image" content="https://bethchapplehair.co.uk/img/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="A client's hair being brushed and blow-dried by Beth Chapple" />
+    <meta name="twitter:card" content="summary_large_image" />
 
-    <!-- Bootstrap 5 -->
+    <!-- Icons -->
+    <link rel="icon" href="favicon.ico" sizes="32x32" />
+    <link rel="apple-touch-icon" href="img/icons/apple-touch-icon.png" />
+    <link rel="manifest" href="site.webmanifest" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <!-- Fonts and styles -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&family=Ysabeau+Office&display=swap"
+      rel="stylesheet"
+    />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
       crossorigin="anonymous"
     />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="stylesheet" href="sass/main.css?v=2" />
+    <link rel="preload" as="image" href="img/BannerImage.webp" media="(min-width: 426px)" fetchpriority="high" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "HairSalon",
+        "@id": "https://bethchapplehair.co.uk/#business",
+        "name": "Beth Chapple Hair",
+        "description": "Hairdresser in Petersfield specialising in natural colour, balayage, grey blending, fine and curly hair.",
+        "url": "https://bethchapplehair.co.uk/",
+        "logo": "https://bethchapplehair.co.uk/img/logo.png",
+        "image": "https://bethchapplehair.co.uk/img/og-image.jpg",
+        "telephone": "+44 7854 441248",
+        "email": "Bethchapplehairstylist@hotmail.com",
+        "priceRange": "££",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Normingtons Salon, 7-9 Heath Road",
+          "addressLocality": "Petersfield",
+          "addressRegion": "Hampshire",
+          "postalCode": "GU31 4JE",
+          "addressCountry": "GB"
+        },
+        "areaServed": {
+          "@type": "City",
+          "name": "Petersfield"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "https://schema.org/Wednesday",
+            "opens": "09:00",
+            "closes": "16:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "https://schema.org/Thursday",
+            "opens": "09:00",
+            "closes": "20:00"
+          }
+        ],
+        "sameAs": [
+          "https://www.instagram.com/bethchapple_hair/",
+          "https://www.facebook.com/profile.php?id=100087504177026"
+        ],
+        "founder": {
+          "@type": "Person",
+          "name": "Beth Chapple",
+          "jobTitle": "Hair Stylist",
+          "award": "Hair and Beauty Awards 2024 finalist"
+        },
+        "potentialAction": {
+          "@type": "ReserveAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://bookings.gettimely.com/bethchapplehair/book",
+            "actionPlatform": [
+              "https://schema.org/DesktopWebPlatform",
+              "https://schema.org/MobileWebPlatform"
+            ]
+          },
+          "result": {
+            "@type": "Reservation",
+            "name": "Hair appointment"
+          }
+        }
+      }
+    </script>
+    <script src="https://kit.fontawesome.com/49598a1ab8.js" crossorigin="anonymous"></script>
 
-    <!-- Google fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap"
-      rel="stylesheet"
-    />
-     <!-- Trial font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Merienda:wght@400;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Merienda:wght@400;600;700;800&family=Quintessential&display=swap" rel="stylesheet">
-<link
-      href="https://fonts.googleapis.com/css2?family=Ysabeau+Office&display=swap"
-      rel="stylesheet"
-    />
-    <!-- end of font -->
-
-    <link rel="stylesheet" href="sass/main.css" />
-    <script
-      src="https://kit.fontawesome.com/49598a1ab8.js"
-      crossorigin="anonymous"
-    ></script>
-
-    <!-- Favicons -->
-    <!-- <link
-      rel="apple-touch-icon"
-      href=""
-      sizes="180x180"
-    /> -->
-    <link
-      rel="icon"
-      href="img/favicon-32x32.svg"
-      sizes="32x32"
-      type="image/svg"
-    />
-    <link rel="mask-icon" href="img/favicon-32x32.svg" color="#000000" />
-    <link rel="icon" href="img/favicon.ico" />
+    <!-- Cookie consent: loads Google Analytics only after the visitor opts in -->
+    <script src="scripts/consent.js?v=1" defer></script>
   </head>
   <body>
     <!-- Nav Start -->
-    <nav class="navbar navbar-expand-md sticky-top">
+    <nav class="navbar navbar-expand-md sticky-top" aria-label="Main">
       <div class="container-fluid">
-        <a class="navbar-brand d-md-none" href="#">
-          <img src="img/Logo-100-svg.svg" alt="Beth Chapple Hair Logo" />
+        <a class="navbar-brand d-md-none" href="./">
+          <img src="img/logo.webp" alt="" width="100" height="73" />
           <p class="mobileHeaderText desktopHide">Beth Chapple Hair</p>
         </a>
         <button
@@ -128,7 +134,7 @@ if (! empty($_POST["send"])) {
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav mx-auto">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
+              <a class="nav-link active" aria-current="page" href="./">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#About">About</a>
@@ -136,9 +142,11 @@ if (! empty($_POST["send"])) {
             <li class="nav-item">
               <a class="nav-link" href="#Contact">Find me</a>
             </li>
-            <a class="navbar-brand d-none d-md-block" href="#">
-              <img src="img/Logo-100-svg.svg" alt="Beth Chapple Hair Logo" />
-            </a>
+            <li class="nav-item d-none d-md-block">
+              <a class="navbar-brand" href="./">
+                <img src="img/logo.webp" alt="Beth Chapple Hair home" width="100" height="73" />
+              </a>
+            </li>
             <li class="nav-item">
               <a class="nav-link" href="services.html">Services</a>
             </li>
@@ -153,6 +161,7 @@ if (! empty($_POST["send"])) {
       </div>
     </nav>
     <!-- Nav End -->
+
     <header>
       <div id="Banner" class="container bannerImage2">
         <div class="row">
@@ -162,19 +171,15 @@ if (! empty($_POST["send"])) {
                 <h1>Beth Chapple Hair</h1>
                 <h2>Professional and personal hair stylist in Petersfield</h2>
                 <div class="svg-wrapper buttonWrapper">
-                  <svg
-                    height="60"
-                    width="190"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <rect class="shape" height="60" width="190" />
-                    <div class="text"><a href="https://bookings.gettimely.com/bethchapplehair/book" target="_blank">Book now</a></div>
-                  </svg>
+                  <a class="drawBtn" href="https://bookings.gettimely.com/bethchapplehair/book" target="_blank" rel="noopener">
+                    <svg height="60" width="190" aria-hidden="true" focusable="false"><rect class="shape" height="60" width="190" /></svg>
+                    <span>Book now</span>
+                  </a>
                 </div>
               </div>
             </div>
             <div class="bannerImage flex-child">
-              <img src="img/TopImage.webp" alt="Lady with her back to the camera having her hair brushed and blow dried" />
+              <img src="img/TopImage.webp" alt="A client with her back to the camera having her hair brushed and blow-dried" width="1000" height="668" loading="lazy" />
             </div>
           </div>
         </div>
@@ -187,7 +192,7 @@ if (! empty($_POST["send"])) {
           <div class="col-sm-12 col-md-4">
             <div class="mobileSpacing">
               <div class="ImgContainer">
-                <img src="img/AboutImg.webp" alt="Me blowdrying a mans hair " />
+                <img src="img/AboutImg.webp" alt="Beth blow-drying a client&#39;s hair in the salon" width="720" height="960" loading="lazy" />
               </div>
             </div>
           </div>
@@ -198,11 +203,11 @@ if (! empty($_POST["send"])) {
             <p>With over 17 years of experience in the hair industry, I recently decided to start my own adventure right here in Petersfield. My career has taken me on some incredible journeys—from styling hair on luxury cruise ships while travelling the world to working behind the scenes at Milan Fashion Week.</p>
             <p>While the catwalks were exciting, my heart has always been at home, helping my lovely local clients feel their best. I specialise in fine hair, curly hair, and natural colour work, ranging from low-maintenance "lived-in" looks to seamless grey blending.</p>
             <p>For me, it’s about more than just a trim. I love the "magic" of a transformation—how a fresh set of highlights or a simple root touch-up can completely lift your mood. Whether you need a good heart-to-heart or just want to walk out feeling like a new person, I’m here to make sure you leave the chair looking and feeling incredible.</p>
-               
+
           </div>
         </div>
         <div class="row mt-4 imageStrap">
-          
+
           <div class="col-sm-12 col-md-8">
             <h3>Quality Products</h3>
             <p>I only work with high quality products from companies like Wella, Moroccanoil and Milkshake. I love working with Wella colours, I believe that with a good colour, no matter how small or big, we can always create some magic.</p>
@@ -212,11 +217,11 @@ if (! empty($_POST["send"])) {
             <p>I’d love to meet you. Please get in touch to book a free colour consultation or just to have a chat about your hair goals.</p>
             <h2>HBA Finalist</h2>
             <p>It was an incredible honour to represent Petersfield as a finalist in the 2024 Hair and Beauty Awards (HBA). Being recognised on a national level was a huge milestone in my career and a wonderful reminder of why I love what I do. I am so lucky to have such a supportive community behind me; my amazing clients have cheered me on since day one. Thank you, Petersfield, for making this town feel like home and for being part of this journey with me.</p>
-          </div>  
+          </div>
           <div class="col-sm-12 col-md-4">
             <div class="mobileSpacing">
               <div class="ImgContainer">
-                <img src="img/HBA24.webp" alt="Me blowdrying a mans hair " />
+                <img src="img/HBA24.webp" alt="Beth holding her 2024 Hair and Beauty Awards finalist certificate" width="600" height="800" loading="lazy" />
               </div>
             </div>
           </div>
@@ -227,43 +232,43 @@ if (! empty($_POST["send"])) {
         <div class="container spacer">
           <h2>Gallery</h2>
             <div class="InstaLink mb-4">
-                  <a href="https://www.instagram.com/bethchapple_hair/" target="_blank">
+                  <a href="https://www.instagram.com/bethchapple_hair/" target="_blank" rel="noopener">
                     <div>
                       <p class="follow">
-                        <i class="fa-brands fa-instagram"></i>Follow me
+                        <i class="fa-brands fa-instagram" aria-hidden="true"></i>Follow me
                       </p>
                       <p class="instaName">@bethchapple_hair</p>
                     </div>
                   </a>
                 </div>
-                <p>For more images and styles please view my <a href="gallery.htm">full gallery</a> or select an image.</p>
+                <p>For more images and styles please view my <a href="gallery.html">full gallery</a> or select an image.</p>
           <div class="row mt-4">
-            
+
             <div class="col-sm-12 col-md-3 col-lg-3">
               <div class="galleryImg">
                 <a href="gallery.html">
-                  <img src="img/gallery/Gallery8.webp" alt="Bridal hair picture. Blonde hair in a bun with white flowers intertwined" loading="lazy" />
+                  <img src="img/gallery/Gallery8.webp" alt="Bridal updo with braided detail and baby&#39;s breath flowers in light brown hair" width="670" height="670" loading="lazy" />
                 </a>
               </div>
             </div>
             <div class="col-sm-12 col-md-3 col-lg-3">
               <div class="galleryImg">
                 <a href="gallery.html">
-                  <img src="img/gallery/Gallery2.webp" alt="Light brown to blonde wavy hair" loading="lazy" />
+                  <img src="img/gallery/Gallery2.webp" alt="Warm caramel and honey blonde balayage with loose waves" width="670" height="670" loading="lazy" />
                 </a>
               </div>
             </div>
             <div class="col-sm-12 col-md-3 col-lg-3">
               <div class="galleryImg">
                 <a href="gallery.html">
-                  <img src="img/gallery/Gallery3.webp" alt="Long blonde hair with lowlights" loading="lazy" />
+                  <img src="img/gallery/Gallery3.webp" alt="Long golden blonde hair styled in glossy waves" width="670" height="670" loading="lazy" />
                 </a>
               </div>
             </div>
             <div class="col-sm-12 col-md-3 col-lg-3">
               <div class="galleryImg">
                 <a href="gallery.html">
-                  <img src="img/gallery/Gallery4.webp" alt="Brown hair tied up in a bun" loading="lazy" />
+                  <img src="img/gallery/Gallery4.webp" alt="Brunette low chignon updo with soft face-framing strands" width="670" height="670" loading="lazy" />
                 </a>
               </div>
             </div>
@@ -272,28 +277,28 @@ if (! empty($_POST["send"])) {
             <div class="col-sm-12 col-md-3 col-lg-3">
               <div class="galleryImg">
                 <a href="gallery.html">
-                  <img src="img/gallery/Gallery5.webp" alt="hair tied up in a bun with a rainbow coloured underlayer" loading="lazy" />
+                  <img src="img/gallery/Gallery5.webp" alt="Hidden rainbow colour underlayer beneath a messy top bun" width="670" height="670" loading="lazy" />
                 </a>
               </div>
             </div>
             <div class="col-sm-12 col-md-3 col-lg-3">
               <div class="galleryImg">
                 <a href="gallery.html">
-                  <img src="img/gallery/Gallery6.webp" alt="light brown, short bob" loading="lazy" />
+                  <img src="img/gallery/Gallery6.webp" alt="Rooted rose-gold blonde inverted bob" width="670" height="672" loading="lazy" />
                 </a>
               </div>
             </div>
             <div class="col-sm-12 col-md-3 col-lg-3">
               <div class="galleryImg">
                 <a href="gallery.html">
-                  <img src="img/gallery/Gallery7.webp" alt="auburn wavy hair past the shoulders" loading="lazy" />
+                  <img src="img/gallery/Gallery7.webp" alt="Long vibrant copper hair with soft waves" width="670" height="670" loading="lazy" />
                 </a>
               </div>
             </div>
             <div class="col-sm-12 col-md-3 col-lg-3">
               <div class="galleryImg">
                 <a href="gallery.html">
-                  <img src="img/gallery/Bridal.webp" alt="bridal hair. in a close bun with purple flowers tied in" loading="lazy" />
+                  <img src="img/gallery/Bridal.webp" alt="Blonde bridal chignon finished with purple flowers" width="600" height="600" loading="lazy" />
                 </a>
               </div>
             </div>
@@ -303,98 +308,31 @@ if (! empty($_POST["send"])) {
       <div id="Contact" class="container spacer">
         <div class="row">
           <h2>Find me</h2>
-          <div class="col-sm-12 col-md-6"> <!--col-lg-4-->
-            <!-- <div class="form-container gradientBox flex-child">
-              <form
-                name="frmContact"
-                id="frmContact"
-                method="post"
-                action=""
-                enctype="multipart/form-data"
-                onsubmit="return validateContactForm()"
-              >
-                <div class="input-row">
-                  <label for="userName" style="padding-top: 20px">Name</label>
-                  <span id="userName-info" class="info"></span><br />
-                  <input
-                    type="text"
-                    class="input-field"
-                    name="userName"
-                    id="userName"
-                    onchange="alerter()"
-                  />
-                </div>
-                <div class="input-row">
-                  <label for="userEmail">Email</label>
-                  <span id="userEmail-info" class="info"></span><br />
-                  <input
-                    type="text"
-                    class="input-field"
-                    name="userEmail"
-                    id="userEmail"
-                  />
-                </div>
-                <div class="input-row">
-                  <label for="userPhone">Phone Number</label>
-                  <span id="userPhone-info" class="info"></span><br />
-                  <input
-                    type="tel"
-                    class="input-field"
-                    name="userPhone"
-                    id="userPhone"
-                  />
-                </div>
-                <div class="input-row">
-                  <label for="subject">Subject</label>
-                  <span id="subject-info" class="info"></span><br />
-                  <input
-                    type="text"
-                    class="input-field"
-                    name="subject"
-                    id="subject"
-                  />
-                </div>
-                <div class="input-row">
-                  <label for="content">Message</label>
-                  <span id="userMessage-info" class="info"></span><br />
-                  <textarea
-                    name="content"
-                    id="content"
-                    class="input-field"
-                  ></textarea>
-                </div>
-                <div id="FormAlert" class="messageAlert hide"><p><i class="fa-solid fa-circle-exclamation"></i> If your message is about a Saturday booking, please be aware that at the moment I have no availability, but you are welcome to join the waitlist or book for another day.</p></div>
-                <div>
-                  <input
-                    type="submit"
-                    name="send"
-                    class="submitBtn"
-                    value="Send"
-                  />
+          <div class="col-sm-12 col-md-6">
 
-                  <div id="statusMessage">
-                    <?php
-                                      if (! empty($message)) {
-                                          ?>
-                    <p class="<?php echo $type; ?>Message">
-                      <?php echo $message; ?>
-                    </p>
-                    <?php
-                                      }
-                                      ?>
-                  </div>
-                </div>
-              </form>
-            </div> -->
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10042.740914520462!2d-0.9339791!3d51.0034886!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487447318721c7ef%3A0x53a46f1a88b32a72!2sNORMINGTONS%20HAIR%20%26%20BEAUTY!5e0!3m2!1sen!2suk!4v1683996529690!5m2!1sen!2suk"
-              style="border: 0"
-              allowfullscreen=""
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-            ></iframe>
+            <div class="mapConsent" data-map-consent>
+              <iframe
+                data-src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10042.740914520462!2d-0.9339791!3d51.0034886!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487447318721c7ef%3A0x53a46f1a88b32a72!2sNORMINGTONS%20HAIR%20%26%20BEAUTY!5e0!3m2!1sen!2suk!4v1683996529690!5m2!1sen!2suk"
+                title="Map showing Normingtons Salon, 7-9 Heath Road, Petersfield"
+                style="border: 0"
+                allowfullscreen
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                hidden
+              ></iframe>
+              <div class="mapPlaceholder">
+                <p>
+                  The map is provided by Google Maps, which may set its own
+                  cookies, so it only loads if you allow it.
+                </p>
+                <button type="button" class="consentBtn" data-map-load>Show map</button>
+                <p class="mt-3 mb-0">
+                  <a href="https://www.google.com/maps/search/?api=1&amp;query=Normingtons+Hair+%26+Beauty+Petersfield+GU31+4JE" target="_blank" rel="noopener">Open in Google Maps</a>
+                </p>
+              </div>
+            </div>
           </div>
-          <div class="col-sm-12 col-md-6"><!--col-lg-4-->
+          <div class="col-sm-12 col-md-6">
             <div class="nonFormContact">
               <div class="container">
                 <div class="row">
@@ -402,7 +340,7 @@ if (! empty($_POST["send"])) {
                     <div class="online contactDetail">
                       <h3>Book Online</h3>
                       <br>
-                      <a href="https://bookings.gettimely.com/bethchapplehair/book" target="_blank">Book Now</a>
+                      <a href="https://bookings.gettimely.com/bethchapplehair/book" target="_blank" rel="noopener">Book Now</a>
                     </div>
                   </div>
                   <div class="col-sm-12 col-lg-6">
@@ -422,7 +360,7 @@ if (! empty($_POST["send"])) {
                   </div>
                   <div class="col-sm-12 col-lg-6">
                     <div class="location contactDetail">
-                <!-- <p>Please be aware that at the moment I have no availability for Saturday bookings but you are welcome to join the waitlist or book for another day.</p> -->
+
                 <h3>Visit me</h3>
                 <br />
                 7-9 Heath Rd,<br />Petersfield<br />GU31 4JE
@@ -431,77 +369,67 @@ if (! empty($_POST["send"])) {
                   Festival car park
                 </p>
               </div>
-                  </div>  
+                  </div>
                 </div>
               </div>
-                      
+
             </div>
           </div>
-          <!-- <div class="col-sm-12 col-md-12 col-lg-4 homeMap">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10042.740914520462!2d-0.9339791!3d51.0034886!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487447318721c7ef%3A0x53a46f1a88b32a72!2sNORMINGTONS%20HAIR%20%26%20BEAUTY!5e0!3m2!1sen!2suk!4v1683996529690!5m2!1sen!2suk"
-              style="border: 0"
-              allowfullscreen=""
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-            ></iframe>
-          </div> -->
+
         </div>
       </div>
     </main>
+
     <footer>
       <div class="container-fluid">
         <div class="container">
           <div class="row pt-4">
             <div class="col-sm-12 col-md-4 order-md-2 logo footerCol">
-              <img src="img/Logo-100-svg.svg" alt="Beth Chapple Logo" loading="lazy" />
+              <img src="img/logo.webp" alt="Beth Chapple Hair logo" width="100" height="73" loading="lazy" />
               <p class="mobileHeaderText desktopHide">Beth Chapple Hair</p>
               <p><strong>Opening hours</strong></p>
               <p>Wednesday - 9am until 4pm</p>
               <p>Thursday - 9am until 8pm</p>
-              <p>
-                Saturday - wait list only
-              </p>
+              <p>Saturday - wait list only</p>
             </div>
             <div class="col-sm-12 col-md-4 order-md-1 policies footerCol">
               <div>
-              <img src="img/scissors2.png" alt="scissors image used to show a bullet point">
-              <p><a href="policies.html">Salon Policies</a></p></div>
-            <div><img src="img/scissors2.png" alt="scissors image used to show a bullet point">
-              <p><a href="cookies.html">Cookie Policy</a></p></div>
-              <div><img src="img/scissors2.png" alt="scissors image used to show a bullet point">
-              <p><a href="privacy.html">Privacy Policy</a></p></div>
+                <img src="img/scissors2.png" alt="" width="32" height="32" loading="lazy" />
+                <p><a href="policies.html">Salon Policies</a></p>
+              </div>
+              <div>
+                <img src="img/scissors2.png" alt="" width="32" height="32" loading="lazy" />
+                <p><a href="cookies.html">Cookie Policy</a></p>
+              </div>
+              <div>
+                <img src="img/scissors2.png" alt="" width="32" height="32" loading="lazy" />
+                <p><a href="cookies.html#cookie-settings">Cookie Settings</a></p>
+              </div>
+              <div>
+                <img src="img/scissors2.png" alt="" width="32" height="32" loading="lazy" />
+                <p><a href="privacy.html">Privacy Policy</a></p>
+              </div>
             </div>
             <div class="col-sm-12 col-md-4 order-md-3 footerCol">
               <p>
-                <i class="fa-solid fa-location-dot"></i> 7-9 Heath Rd,
+                <i class="fa-solid fa-location-dot" aria-hidden="true"></i> 7-9 Heath Rd,
                 Petersfield GU31 4JE
               </p>
               <p>
-                <i class="fa-solid fa-phone"></i>
+                <i class="fa-solid fa-phone" aria-hidden="true"></i>
                 <a href="tel:+447854441248">07854 441 248</a>
               </p>
               <p>
-                <i class="fa-solid fa-at"></i>
-                <a href="mailto:Bethchapplehairstylist@hotmail.com"
-                  >Bethchapplehairstylist@hotmail.com</a
-                >
+                <i class="fa-solid fa-at" aria-hidden="true"></i>
+                <a href="mailto:Bethchapplehairstylist@hotmail.com">Bethchapplehairstylist@hotmail.com</a>
               </p>
               <p>
-                <i class="fa-brands fa-instagram"></i>
-                <a
-                  href="https://www.instagram.com/bethchapple_hair/"
-                  target="_blank"
-                  >@bethchapple_hair</a
-                >
+                <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+                <a href="https://www.instagram.com/bethchapple_hair/" target="_blank" rel="noopener">@bethchapple_hair</a>
               </p>
               <p>
-                <i class="fa-brands fa-facebook"></i>
-                <a
-                  href="https://www.facebook.com/profile.php?id=100087504177026"
-                  target="_blank"
-                  >Give me a like</a
-                >
+                <i class="fa-brands fa-facebook" aria-hidden="true"></i>
+                <a href="https://www.facebook.com/profile.php?id=100087504177026" target="_blank" rel="noopener">Give me a like</a>
               </p>
             </div>
           </div>
@@ -509,60 +437,11 @@ if (! empty($_POST["send"])) {
       </div>
     </footer>
 
-    <!-- Bootstrap script -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
       crossorigin="anonymous"
+      defer
     ></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script>
-      function validateContactForm() {
-        var valid = true;
-
-        $('.info').html('');
-        $('.input-field').css('border', '#e0dfdf 1px solid');
-        var userName = $('#userName').val();
-        var userEmail = $('#userEmail').val();
-        var userPhone = $('#userPhone').val();
-        var subject = $('#subject').val();
-        var content = $('#content').val();
-
-        if (userName == '') {
-          $('#userName-info').html('Required.');
-          $('#userName').css('border', '#e66262 1px solid');
-          valid = false;
-        }
-        if (userEmail == '') {
-          $('#userEmail-info').html('Required.');
-          $('#userEmail').css('border', '#e66262 1px solid');
-          valid = false;
-        }
-        if (!userEmail.match(/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/)) {
-          $('#userEmail-info').html('Invalid Email Address.');
-          $('#userEmail').css('border', '#e66262 1px solid');
-          valid = false;
-        }
-
-        if (userPhone == '') {
-          $('#userPhone-info').html('Required.');
-          $('#userPhone').css('border', '#e66262 1px solid');
-          valid = false;
-        }
-
-        if (subject == '') {
-          $('#subject-info').html('Required.');
-          $('#subject').css('border', '#e66262 1px solid');
-          valid = false;
-        }
-        if (content == '') {
-          $('#userMessage-info').html('Required.');
-          $('#content').css('border', '#e66262 1px solid');
-          valid = false;
-        }
-        return valid;
-      }
-    </script>
-    <script src="scripts/scripts.js"></script>
   </body>
 </html>
