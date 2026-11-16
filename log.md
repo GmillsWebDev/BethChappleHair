@@ -43,8 +43,8 @@ Newest entries first.
 - Added `404.html`.
 
 ### Follow-up
-- Live site served the same pages on http/https, www/non-www and /index.html with no redirects (duplicate content). Added 301 redirects in  to https://bethchapplehair.co.uk/.
+- Live site served the same pages on http/https, www/non-www and /index.html with no redirects (duplicate content). Added 301 redirects in `.htaccess` to https://bethchapplehair.co.uk/.
 - Deleted 20 unused images (old logos/banners, GalleryImg2_*, MFW) and the commented-out gallery banner block. Kept the commented Bridal tab + bridal2.webp for when bridal returns.
 
 ### Not done / needs input
-- See the session summary: the server `.htaccess` merge, copy for the services page, and a few unreferenced images left in `img/`.
+- See the session summary: merge `.htaccess` with any existing server copy; new copy for the services page.
