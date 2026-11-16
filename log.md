@@ -46,5 +46,41 @@ Newest entries first.
 - Live site served the same pages on http/https, www/non-www and /index.html with no redirects (duplicate content). Added 301 redirects in `.htaccess` to https://bethchapplehair.co.uk/.
 - Deleted 20 unused images (old logos/banners, GalleryImg2_*, MFW) and the commented-out gallery banner block. Kept the commented Bridal tab + bridal2.webp for when bridal returns.
 
-### Not done / needs input
-- See the session summary: merge `.htaccess` with any existing server copy; new copy for the services page.
+### Status
+All work is on branch `site-overhaul` (committed, **not pushed, not live**). `main` still matches the live site.
+
+## Next steps
+
+### Before going live (deployment checklist)
+1. **Check the server's existing `.htaccess`** (cPanel File Manager → public_html, enable "show hidden files").
+   - If one exists, **merge** ours into it rather than overwriting it. Keep anything cPanel/LiteSpeed added (e.g. PHP handler lines).
+   - If it already has an HTTPS or www redirect, keep **only one** set of redirect rules, or you risk a redirect loop.
+   - Many FTP clients hide dotfiles; make sure `.htaccess` actually uploads.
+2. Merge `site-overhaul` into `main` and upload all files.
+3. **Delete from the server** (uploading won't remove them): `docs/`, `gallery-scripts.js`, `gallery-styles.css`, `scripts/scripts.js`, `scripts/build.js`, `scripts/start.js`, `img/Archive/`, `img/px-conversions.zip`, the old `img/Logo-*-svg.svg` / `img/favicon-32x32.svg` files, and the other images deleted in this session.
+4. **Smoke test on the live site:**
+   - `http://www.bethchapplehair.co.uk/index.html` should 301 to `https://bethchapplehair.co.uk/` in one hop.
+   - `https://bethchapplehair.co.uk/nope` should show the styled 404 page.
+   - Cookie banner appears; Reject leaves no `_ga` cookies; Accept sets them; "Show map" loads the map.
+   - Gallery lightbox, services tabs (desktop) and accordion (mobile) work.
+5. If the CSS looks stale, browsers are caching the old file: bump `?v=` on `main.css` in all pages.
+
+### After going live
+- Submit `https://bethchapplehair.co.uk/sitemap.xml` in Google Search Console and request indexing of the home page.
+- Test the home page in Google's Rich Results Test (HairSalon schema).
+- Make sure the Google Business Profile name, address, phone and hours exactly match the site.
+- Expect GA visitor numbers to drop (only consenting visitors are counted now).
+
+### For Beth / Gary to review
+- Page titles and meta descriptions, gallery alt text, cookie policy rewrite, privacy policy edits.
+- Saturday is left out of the schema opening hours (waitlist only). Confirm that's right.
+- Whether to keep the commented-out Bridal tab (and `img/bridal2.webp`) or delete it.
+- "Find me" and "Contact" in the nav both go to `#Contact`; consider merging them.
+
+### Content work (next session)
+- Services page intro copy per service (colour, balayage/highlights, grey blending, cut & finish, fine/curly hair, treatments), mentioning Petersfield. Open questions:
+  1. Is the colour consultation free, and does it include the skin test?
+  2. Beth's approach to fine and curly hair (dry cutting, a particular method, product advice?)
+  3. Are grey blending and "lived-in" colour separate services or covered by existing prices?
+  4. How much to say about gents' cuts and (paused) bridal?
+- Possibly a short FAQ section (skin tests, deposits, parking at the Festival car park), which is also good for search.
