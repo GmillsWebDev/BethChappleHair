@@ -12,6 +12,23 @@ ErrorDocument 404 /404.html
 
   RewriteCond %{THE_REQUEST} \s/index\.html[\s?]
   RewriteRule ^index\.html$ / [L,R=301]
+
+  # Gallery images renamed 2026-11-17 (old names may be indexed in Google Images)
+  RewriteRule ^img/gallery/Gallery8\.webp$ /img/gallery/bridal-updo-braid-flowers.webp [L,R=301]
+  RewriteRule ^img/gallery/Gallery9\.webp$ /img/gallery/blonde-balayage-long-waves.webp [L,R=301]
+  RewriteRule ^img/gallery/Gallery2\.webp$ /img/gallery/caramel-honey-balayage.webp [L,R=301]
+  RewriteRule ^img/gallery/Gallery3\.webp$ /img/gallery/golden-blonde-glossy-waves.webp [L,R=301]
+  RewriteRule ^img/gallery/Gallery4\.webp$ /img/gallery/brunette-low-chignon.webp [L,R=301]
+  RewriteRule ^img/gallery/Gallery5\.webp$ /img/gallery/hidden-rainbow-colour.webp [L,R=301]
+  RewriteRule ^img/gallery/Gallery6\.webp$ /img/gallery/rose-gold-inverted-bob.webp [L,R=301]
+  RewriteRule ^img/gallery/Gallery7\.webp$ /img/gallery/copper-hair-long-waves.webp [L,R=301]
+  RewriteRule ^img/gallery/Bridal\.webp$ /img/gallery/bridal-chignon-purple-flowers.webp [L,R=301]
+  RewriteRule ^img/gallery/Gallery15\.webp$ /img/gallery/blonde-pixie-cut.webp [L,R=301]
+  RewriteRule ^img/gallery/Gallery10\.webp$ /img/gallery/copper-auburn-waves.webp [L,R=301]
+  RewriteRule ^img/gallery/Gallery14\.webp$ /img/gallery/pastel-pink-textured-crop.webp [L,R=301]
+  RewriteRule ^img/gallery/Gallery11\.webp$ /img/gallery/lived-in-blonde-balayage.webp [L,R=301]
+  RewriteRule ^img/gallery/Gallery12\.webp$ /img/gallery/bronde-balayage.webp [L,R=301]
+  RewriteRule ^img/gallery/Gallery13\.webp$ /img/gallery/icy-blonde-highlights.webp [L,R=301]
 </IfModule>
 
 # Compress text files
@@ -31,10 +48,12 @@ ErrorDocument 404 /404.html
   ExpiresByType image/jpeg "access plus 6 months"
   ExpiresByType image/x-icon "access plus 6 months"
   ExpiresByType image/vnd.microsoft.icon "access plus 6 months"
+  ExpiresByType image/svg+xml "access plus 1 month"
 </IfModule>
 
 <IfModule mod_mime.c>
   AddType image/webp .webp
+  AddType image/svg+xml .svg
   AddType application/manifest+json .webmanifest
 </IfModule>
 

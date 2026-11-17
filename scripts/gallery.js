@@ -3,36 +3,38 @@
 (function () {
   'use strict';
 
-  var links = Array.prototype.slice.call(
+  // Viewer state
+  let current = 0;
+  let lastFocus = null;
+  let hideTimer = null;
+
+  const links = Array.prototype.slice.call(
     document.querySelectorAll('#image-gallery .img-wrapper a')
   );
   if (!links.length) return;
 
-  var overlay = document.createElement('div');
+  const overlay = document.createElement('div');
   overlay.id = 'overlay';
   overlay.hidden = true;
   overlay.setAttribute('role', 'dialog');
   overlay.setAttribute('aria-modal', 'true');
   overlay.setAttribute('aria-label', 'Image viewer');
   overlay.innerHTML =
-    '<button type="button" id="prevButton" aria-label="Previous image"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>' +
+    '<button type="button" id="prevButton" aria-label="Previous image"><svg class="icon" aria-hidden="true" focusable="false"><use href="img/icons/sprite.svg?v=1#i-prev"></use></svg></button>' +
     '<img alt="" />' +
-    '<button type="button" id="nextButton" aria-label="Next image"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>' +
-    '<button type="button" id="exitButton" aria-label="Close image viewer"><i class="fa fa-times" aria-hidden="true"></i></button>';
+    '<button type="button" id="nextButton" aria-label="Next image"><svg class="icon" aria-hidden="true" focusable="false"><use href="img/icons/sprite.svg?v=1#i-next"></use></svg></button>' +
+    '<button type="button" id="exitButton" aria-label="Close image viewer"><svg class="icon" aria-hidden="true" focusable="false"><use href="img/icons/sprite.svg?v=1#i-close"></use></svg></button>';
   document.body.appendChild(overlay);
 
-  var image = overlay.querySelector('img');
-  var prevButton = overlay.querySelector('#prevButton');
-  var nextButton = overlay.querySelector('#nextButton');
-  var exitButton = overlay.querySelector('#exitButton');
-  var buttons = [prevButton, nextButton, exitButton];
-  var current = 0;
-  var lastFocus = null;
-  var hideTimer = null;
+  const image = overlay.querySelector('img');
+  const prevButton = overlay.querySelector('#prevButton');
+  const nextButton = overlay.querySelector('#nextButton');
+  const exitButton = overlay.querySelector('#exitButton');
+  const buttons = [prevButton, nextButton, exitButton];
 
   function show(index) {
     current = (index + links.length) % links.length;
-    var thumb = links[current].querySelector('img');
+    const thumb = links[current].querySelector('img');
     image.src = links[current].getAttribute('href');
     image.alt = thumb ? thumb.alt : '';
   }
@@ -86,8 +88,8 @@
     else if (event.key === 'ArrowRight') show(current + 1);
     else if (event.key === 'Tab') {
       // keep focus inside the viewer
-      var i = buttons.indexOf(document.activeElement);
-      var next = event.shiftKey ? i - 1 : i + 1;
+      const i = buttons.indexOf(document.activeElement);
+      const next = event.shiftKey ? i - 1 : i + 1;
       buttons[(next + buttons.length) % buttons.length].focus();
       event.preventDefault();
     }
