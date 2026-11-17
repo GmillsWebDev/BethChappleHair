@@ -4,9 +4,9 @@
  *   Items also carry data-colour and data-texture for future filters.
  * Lightbox: click a photo to view it full size; it steps through the photos currently shown.
  *   Keyboard: Enter opens, Left/Right move between images, Esc closes. */
-(function () {
-  'use strict';
+'use strict';
 
+(() => {
   // Viewer state
   let shown = []; // links visible when the viewer was opened
   let current = 0;
@@ -27,19 +27,19 @@
 
   function applyFilter(value) {
     let visible = 0;
-    items.forEach(function (item) {
+    items.forEach((item) => {
       const match = value === 'all' || item.getAttribute('data-length') === value;
       item.hidden = !match;
       if (match) visible++;
     });
-    filterButtons.forEach(function (button) {
+    filterButtons.forEach((button) => {
       button.setAttribute('aria-pressed', String(button.getAttribute('data-filter-length') === value));
     });
     if (count) {
       count.textContent =
         value === 'all'
-          ? 'Showing all ' + items.length + ' photos'
-          : 'Showing ' + visible + ' ' + labels[value] + ' looks';
+          ? `Showing all ${items.length} photos`
+          : `Showing ${visible} ${labels[value]} looks`;
     }
   }
 
@@ -54,8 +54,8 @@
   if (filterBar) {
     filterBar.hidden = false; // only shown when this script runs
     if (count) count.hidden = false;
-    filterButtons.forEach(function (button) {
-      button.addEventListener('click', function () {
+    filterButtons.forEach((button) => {
+      button.addEventListener('click', () => {
         setFilter(button.getAttribute('data-filter-length'));
       });
     });
@@ -86,10 +86,10 @@
 
   function visibleLinks() {
     return items
-      .filter(function (item) {
+      .filter((item) => {
         return !item.hidden;
       })
-      .map(function (item) {
+      .map((item) => {
         return item.querySelector('.galleryItem');
       });
   }
@@ -109,7 +109,7 @@
     show(shown.indexOf(link));
     overlay.hidden = false;
     document.body.style.overflow = 'hidden';
-    requestAnimationFrame(function () {
+    requestAnimationFrame(() => {
       overlay.classList.add('is-open');
     });
     exitButton.focus();
@@ -118,35 +118,35 @@
   function close() {
     overlay.classList.remove('is-open');
     document.body.style.overflow = '';
-    hideTimer = setTimeout(function () {
+    hideTimer = setTimeout(() => {
       overlay.hidden = true;
     }, 400);
     if (lastFocus) lastFocus.focus();
   }
 
-  items.forEach(function (item) {
+  items.forEach((item) => {
     const link = item.querySelector('.galleryItem');
-    link.addEventListener('click', function (event) {
+    link.addEventListener('click', (event) => {
       event.preventDefault();
       open(link);
     });
   });
 
-  prevButton.addEventListener('click', function (event) {
+  prevButton.addEventListener('click', (event) => {
     event.stopPropagation();
     show(current - 1);
   });
-  nextButton.addEventListener('click', function (event) {
+  nextButton.addEventListener('click', (event) => {
     event.stopPropagation();
     show(current + 1);
   });
-  exitButton.addEventListener('click', function (event) {
+  exitButton.addEventListener('click', (event) => {
     event.stopPropagation();
     close();
   });
   overlay.addEventListener('click', close);
 
-  document.addEventListener('keydown', function (event) {
+  document.addEventListener('keydown', (event) => {
     if (!overlay.classList.contains('is-open')) return;
     if (event.key === 'Escape') close();
     else if (event.key === 'ArrowLeft') show(current - 1);

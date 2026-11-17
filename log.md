@@ -110,6 +110,12 @@ Newest entries first.
 - No review schema: Google doesn't show stars for reviews a business shows on its own site.
 - `main.css?v=6`, `reviews.js?v=1`.
 
+### DeepSource fixes (PR #3)
+- 22 minor findings (dashboard only, none inline): JS-0241 function-expression callbacks (18), JS-0246 string concatenation (2), JS-0118 strict mode inside the wrapper (2). Fixed in `gallery.js` and `reviews.js`, and the same patterns in `consent.js` (likely why PR #2 kept failing after the `var` fix).
+- `window.gtag` deliberately left as a regular function (arrow functions have no `arguments`, which would silently stop GA recording); marked `// skipcq: JS-0241`.
+- `consent.js?v=3`, `gallery.js?v=5`, `reviews.js?v=2`.
+- Re-tested in Chrome: GA loads only after Accept and `dataLayer` holds real Arguments objects; Reject deletes `_ga` cookies and leaves others; map consent, cookie form, lightbox, gallery filters and reviews carousel all pass. No JS errors.
+
 ## 2026-11-16 — Site overhaul (branch `site-overhaul`)
 
 ### Performance

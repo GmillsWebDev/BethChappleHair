@@ -35,6 +35,7 @@ Static marketing site for **Beth Chapple Hair**, a self-employed hairdresser in 
 - If consent categories change, bump `CONSENT_VERSION` in `consent.js` and update `cookies.html`.
 - When pages are added or removed, update `sitemap.xml`.
 - Images: `.webp` (convert with Pillow: `python -m pip install --user pillow`; no other image tools on this machine), descriptive kebab-case file names, meaningful `alt` (decorative = `alt=""`), `width`/`height` attributes, `loading="lazy"` below the fold. External links: `target="_blank" rel="noopener"`.
+- **JavaScript style (DeepSource checks every PR):** `'use strict';` at the top of the file (not inside the wrapper), `const`/`let` never `var`, arrow functions for callbacks, template literals instead of `+` concatenation with variables. Exception: `window.gtag` in `consent.js` must stay a regular `function` (gtag.js needs the real `arguments` object); it carries `// skipcq: JS-0241`. Read PR findings with `gh api repos/GmillsWebDev/BethChappleHair/pulls/<n>/comments`; issues outside the diff only show on the DeepSource dashboard.
 - British English in copy ("colour", "specialise"). Site copy is first person (Beth).
 
 ## Adding gallery photos

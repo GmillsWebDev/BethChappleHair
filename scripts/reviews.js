@@ -2,9 +2,9 @@
  * The row scrolls by swipe/trackpad on its own; this only adds the arrow buttons
  * (tablet and up) and hides each one when there's nothing further in that direction.
  * No auto-rotation by design. */
-(function () {
-  'use strict';
+'use strict';
 
+(() => {
   const track = document.getElementById('reviewsTrack');
   if (!track) return;
   const prev = document.querySelector('.carouselBtn--prev');
@@ -34,18 +34,18 @@
     });
   }
 
-  prev.addEventListener('click', function () {
+  prev.addEventListener('click', () => {
     move(-1);
   });
-  next.addEventListener('click', function () {
+  next.addEventListener('click', () => {
     move(1);
   });
 
   let ticking = false;
-  track.addEventListener('scroll', function () {
+  track.addEventListener('scroll', () => {
     if (ticking) return;
     ticking = true;
-    requestAnimationFrame(function () {
+    requestAnimationFrame(() => {
       update();
       ticking = false;
     });
