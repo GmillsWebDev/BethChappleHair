@@ -9,7 +9,7 @@ Living to-do list. Update it as things are done; the dated entries below are the
    - If one exists, **merge** ours into it rather than overwriting it. Keep anything cPanel/LiteSpeed added (e.g. PHP handler lines).
    - If it already has an HTTPS or www redirect, keep **only one** set of redirect rules, or you risk a redirect loop.
    - Many FTP clients hide dotfiles; make sure `.htaccess` actually uploads.
-2. Merge feature branches into the release branch (currently `release/GeneralOnceover`), merge that into `main`, then upload all files (including the new `img/icons/sprite.svg`, `img/icons/instagram.svg`, `img/hba-awards-trophies.webp` and the renamed `img/gallery/*.webp`).
+2. Merge feature branches into the release branch (currently `release/GeneralOnceover`), merge that into `main`, then upload all files (including the new `img/icons/sprite.svg`, `img/icons/instagram.svg`, `img/hba-awards-trophies.webp` and the renamed and new `img/gallery/*.webp`). Don't upload `img/galleryNew/` (originals inbox).
 3. **Delete from the server** (uploading won't remove them): `docs/`, `gallery-scripts.js`, `gallery-styles.css`, `scripts/scripts.js`, `scripts/build.js`, `scripts/start.js`, `img/Archive/`, `img/px-conversions.zip`, the old `img/Logo-*-svg.svg` / `img/favicon-32x32.svg` files, the images deleted on 2026-11-16, and the old `img/gallery/Gallery*.webp` / `img/gallery/Bridal.webp`.
 4. **Smoke test on the live site:**
    - `http://www.bethchapplehair.co.uk/index.html` should 301 to `https://bethchapplehair.co.uk/` in one hop.
@@ -35,6 +35,9 @@ Living to-do list. Update it as things are done; the dated entries below are the
 - Possibly a short FAQ section (skin tests, deposits, parking at the Festival car park), which is also good for search.
 - Reviews/testimonials she's happy to have quoted (then consider review schema).
 - Old Fresha listings are still live: one with the wrong postcode (GU31 7JE) and one at 43 Chapel St, GU32 3DY with a different phone number. She no longer uses Fresha; ask them to remove both. (Beth has replied with a voice note; not yet gone through.)
+
+- **Review link:** "Leave a review" points at a Google search for now. Replace it with Beth's own link from her Business Profile ("Ask for reviews", looks like `g.page/r/…/review`); marked `TODO` in `index.html`. Then consider a printed QR code for the salon.
+- Update the review count ("from 26 Google reviews") when it changes, and swap in new reviews now and then.
 
 ### To review / decide
 - Page titles and meta descriptions, gallery alt text, cookie policy rewrite, privacy policy edits.
@@ -89,6 +92,31 @@ Newest entries first.
 - Cache busting: `consent.js?v=2` (all pages), `gallery.js?v=3`.
 - Tested in headless Chrome: lightbox opens, arrow keys move and wrap, Esc closes, arrow/close icons render; "Show map" loads the map and stores consent; banner Reject and the cookie settings form save correctly.
 - DeepSource results can now be read with `gh` (GitHub CLI, signed in as the repo owner): inline comments via `gh api repos/GmillsWebDev/BethChappleHair/pulls/<n>/comments`. Issues outside a PR's diff only show on the DeepSource dashboard.
+
+### Gallery rebuild: masonry + length filter
+- 30 new photos (originals in `img/galleryNew/`, now git-ignored as an inbox) converted to webp in two sizes: `name.webp` (1000px wide, used by the lightbox) and `name-sm.webp` (500px wide, used in the grid). All metadata stripped (20 originals had GPS location). 96 MB of originals → 6.5 MB.
+- New photo `blonde-pixie-long-fringe` replaces the old square crop `blonde-pixie-cut.webp` (deleted; the `Gallery15.webp` redirect now points to the new file).
+- `gallery.html`: Bootstrap rows replaced by a `<ul class="masonry">` (CSS columns: 2 / 3 / 4 at <768 / 768+ / 1200+). New photos newest first, the 14 older square photos mixed in every third slot. First 8 load eagerly, the rest lazily.
+- Each item carries `data-length` (`long` / `medium` / `short` / `up-do`), `data-colour` (`blonde` / `brunette` / `copper` / `vivid`, space-separated when two apply) and `data-texture` (`curly` / `not-curly`). Only length has a filter for now; colour and texture are there for later.
+- Length filter buttons (`aria-pressed`) plus a live "Showing N … looks" count. Hidden unless JavaScript runs. The URL updates (`gallery.html?length=short`), so a filtered view can be linked to, e.g. from the services page.
+- Lightbox steps only through the photos the current filter shows. Lightbox image now limited to the screen height so tall portrait photos fit.
+- `main.css?v=4`, `gallery.js?v=4`.
+- Tested in Chrome: all 44 images load; each filter shows the right count, pressed state and URL; lightbox inside the "short" filter cycles the 9 short looks and wraps; desktop and mobile screenshots checked.
+
+### Reviews section (home page)
+- New `#Reviews` section ("What my clients say") between the gallery preview and "Find me": 5.0 from 26 Google reviews (updated by hand), 7 review cards, "Leave a review" and "Read all reviews on Google" buttons.
+- Reviews copied from Google (supplied in `reviews.md`): text exactly as written, names shortened to first name + initial, no dates (relative dates go stale).
+- Layout (revised same day, the masonry version was too long): a scroll-snap carousel at every width, showing 1 card plus a peek on mobile, 2 on tablet and 3 on desktop, with cards in a row the same height. The rating and both buttons sit above the cards. ‹ › arrow buttons on tablet and up come from `scripts/reviews.js` (home page only); they dim at each end and use `aria-disabled` so keyboard focus isn't lost. No auto-rotation. Without JS the row still scrolls by touch or trackpad.
+- No review schema: Google doesn't show stars for reviews a business shows on its own site.
+- `main.css?v=6`, `reviews.js?v=1`.
+
+### DeepSource fixes (PR #3)
+- 22 minor findings (dashboard only, none inline): JS-0241 function-expression callbacks (18), JS-0246 string concatenation (2), JS-0118 strict mode inside the wrapper (2). Fixed in `gallery.js` and `reviews.js`, and the same patterns in `consent.js` (likely why PR #2 kept failing after the `var` fix).
+- `window.gtag` deliberately left as a regular function (arrow functions have no `arguments`, which would silently stop GA recording); marked `// skipcq: JS-0241`.
+- `consent.js?v=3`, `gallery.js?v=5`, `reviews.js?v=2`.
+- Second DeepSource pass (13 findings, all `consent.js`, now in the diff): optional chaining (`consent?.maps`), `Boolean(x)` instead of `!!x`, `catch {}` without an unused `e`. The `arguments` push in `window.gtag` is marked `// skipcq: JS-0244` (rest parameters would give gtag.js a plain array, which it ignores). `consent.js?v=4`.
+- Re-tested: GA consent flow, banner, map button, settings form, plus corrupt saved consent (banner shows, no error), saved consent (no banner, form pre-filled) and an outdated consent version (asked again).
+- Re-tested in Chrome: GA loads only after Accept and `dataLayer` holds real Arguments objects; Reject deletes `_ga` cookies and leaves others; map consent, cookie form, lightbox, gallery filters and reviews carousel all pass. No JS errors.
 
 ## 2026-11-16 — Site overhaul (branch `site-overhaul`)
 

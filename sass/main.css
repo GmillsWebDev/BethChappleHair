@@ -318,6 +318,189 @@ main h2::after {
   margin-top: 2rem;
 }
 
+/* Reviews (home page): scroll-snap carousel. 1 card + peek on mobile, 2 on tablet, 3 on desktop.
+   Arrow buttons are shown by scripts/reviews.js (tablet and up). */
+.reviewsHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+  margin-bottom: 1.5rem;
+}
+.reviewsSummary {
+  margin: 0;
+  font-size: 1.1rem;
+}
+.reviewsCarousel {
+  position: relative;
+}
+.stars,
+.reviewCard__stars {
+  color: #ef7a32;
+  letter-spacing: 0.1em;
+}
+.reviewsSummary .stars {
+  margin-right: 0.5rem;
+  font-size: 1.3rem;
+}
+.reviews {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding: 0 0.25rem;
+  padding: 0.25rem 0.25rem 1rem;
+  margin: 0 -0.25rem;
+}
+.reviews:focus-visible {
+  outline: 3px solid #7c3996;
+  outline-offset: 2px;
+}
+.reviewCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 85%;
+  scroll-snap-align: start;
+  margin: 0;
+  padding: 1.75rem 1.5rem 1.25rem;
+  background: #fff;
+  border: 1px solid #e3dde6;
+  border-radius: 0.5rem;
+}
+.reviewCard::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 0.3rem;
+  border-radius: 0.5rem 0.5rem 0 0;
+  background: linear-gradient(to right, rgba(30, 103, 179, 0.8) 0%, rgba(156, 52, 147, 0.8) 30%, rgba(239, 47, 72, 0.8) 66%, rgba(242, 117, 50, 0.8) 100%);
+}
+.reviewCard__stars {
+  margin-bottom: 0.75rem;
+}
+.reviewCard__quote {
+  position: relative;
+  margin: 0 0 1rem;
+}
+.reviewCard__quote::before {
+  content: "\201C";
+  position: absolute;
+  top: -2.9rem;
+  right: 0;
+  font-family: "Ysabeau Office", sans-serif;
+  font-size: 4rem;
+  line-height: 1;
+  color: #e3dde6;
+}
+.reviewCard__quote p {
+  position: relative;
+  margin: 0;
+}
+.reviewCard__name {
+  margin-top: auto;
+  font-family: "Ysabeau Office", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+.reviewCard__name span {
+  display: block;
+  font-family: "Nanum Gothic Coding", monospace;
+  font-size: 0.8rem;
+  font-weight: normal;
+  color: #555;
+}
+@media screen and (min-width: 768px) {
+  .reviews {
+    gap: 1.5rem;
+  }
+  .reviewCard {
+    flex-basis: calc((100% - 1.5rem) / 2);
+  }
+}
+@media screen and (min-width: 1200px) {
+  .reviewCard {
+    flex-basis: calc((100% - 3rem) / 3);
+  }
+}
+.carouselBtn {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin-top: -1.875rem;
+  padding: 0;
+  border: 2px solid #7c3996;
+  border-radius: 50%;
+  background: #fff;
+  color: #7c3996;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+}
+.carouselBtn[hidden] {
+  display: none;
+}
+.carouselBtn--prev {
+  left: -1rem;
+}
+.carouselBtn--next {
+  right: -1rem;
+}
+.carouselBtn:hover,
+.carouselBtn:focus-visible {
+  background: #7c3996;
+  color: #fff;
+}
+.carouselBtn[aria-disabled="true"] {
+  opacity: 0.35;
+  cursor: default;
+  background: #fff;
+  color: #7c3996;
+}
+.carouselBtn .icon {
+  font-size: 1.1rem;
+}
+
+.reviewsActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+}
+.reviewBtn {
+  display: inline-block;
+  padding: 0.6rem 1.4rem;
+  border: 2px solid #7c3996;
+  border-radius: 2rem;
+  background: #fff;
+  color: #000;
+  text-decoration: none;
+}
+.reviewBtn:visited {
+  color: #000;
+}
+.reviewBtn:hover,
+.reviewBtn:focus-visible {
+  background: #f3ebf6;
+  color: #000;
+}
+.reviewBtn--primary,
+.reviewBtn--primary:visited {
+  background: #7c3996;
+  color: #fff;
+}
+.reviewBtn--primary:hover,
+.reviewBtn--primary:focus-visible {
+  background: #5f2a74;
+  color: #fff;
+}
+
 #Contact iframe {
   height: 100%;
   width: 100%;
@@ -347,17 +530,96 @@ main h2::after {
   font-size: 1.1rem;
 }
 
-.img-wrapper {
-  position: relative;
-  margin-top: 15px;
+/* Gallery page: masonry (CSS columns) + length filter */
+.galleryFilters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+.galleryFilters[hidden] {
+  display: none;
+}
+.galleryFilters__label {
+  margin-right: 0.5rem;
+  font-family: "Ysabeau Office", sans-serif;
+  font-size: 1.2rem;
+}
+.filterBtn {
+  padding: 0.35rem 1rem;
+  border: 2px solid #7c3996;
+  border-radius: 2rem;
+  background: #fff;
+  color: #000;
+  font: inherit;
   cursor: pointer;
 }
-.img-wrapper img {
-  width: 100%;
+.filterBtn:hover {
+  background: #f3ebf6;
+}
+.filterBtn[aria-pressed="true"] {
+  background: #7c3996;
+  color: #fff;
+}
+.filterBtn:focus-visible {
+  outline: 3px solid #ef5634;
+  outline-offset: 2px;
+}
+.galleryCount {
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
 }
 
-.img-wrapper a {
+.masonry {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  column-count: 2;
+  column-gap: 0.75rem;
+}
+@media screen and (min-width: 768px) {
+  .masonry {
+    column-count: 3;
+    column-gap: 1rem;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .masonry {
+    column-count: 4;
+  }
+}
+.masonry__item {
+  break-inside: avoid;
+  margin-bottom: 0.75rem;
+}
+@media screen and (min-width: 768px) {
+  .masonry__item {
+    margin-bottom: 1rem;
+  }
+}
+.masonry__item[hidden] {
+  display: none;
+}
+.galleryItem {
   display: block;
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.25rem;
+}
+.galleryItem img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 0.6s ease;
+}
+.galleryItem:hover img,
+.galleryItem:focus-visible img {
+  transform: scale(1.04);
+}
+.galleryItem:focus-visible {
+  outline: 3px solid #7c3996;
+  outline-offset: 2px;
 }
 
 .img-overlay {
@@ -374,8 +636,8 @@ main h2::after {
   align-items: center;
   opacity: 0;
 }
-.img-wrapper:hover .img-overlay,
-.img-wrapper a:focus-visible + .img-overlay {
+.galleryItem:hover .img-overlay,
+.galleryItem:focus-visible .img-overlay {
   opacity: 1;
 }
 .img-overlay svg {
@@ -414,23 +676,14 @@ main h2::after {
 }
 #overlay img {
   margin: 0;
-  width: 90%;
+  width: auto;
   height: auto;
+  max-width: calc(100% - 7rem);
+  max-height: 90vh;
   -o-object-fit: contain;
      object-fit: contain;
   padding: 0;
 }
-@media screen and (min-width: 768px) {
-  #overlay img {
-    width: 60%;
-  }
-}
-@media screen and (min-width: 1200px) {
-  #overlay img {
-    width: 40%;
-  }
-}
-
 #nextButton {
   color: #fff;
   font-size: 2em;
