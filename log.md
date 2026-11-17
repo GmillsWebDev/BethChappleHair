@@ -4,6 +4,8 @@
 
 Living to-do list. Update it as things are done; the dated entries below are the history.
 
+**Next session:** set up CI/CD (GitHub Actions → Eco Web Hosting: `main` → live, `release/**` → test.bethchapplehair.co.uk). Plan and step-by-step guide in `CICD_plan.md` (git-ignored, local only). Once that's in place, most of the checklist below is handled by the deploy.
+
 ### Deployment checklist (next upload)
 1. **Check the server's existing `.htaccess`** (cPanel File Manager → public_html, enable "show hidden files").
    - If one exists, **merge** ours into it rather than overwriting it. Keep anything cPanel/LiteSpeed added (e.g. PHP handler lines).
