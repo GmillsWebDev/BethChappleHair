@@ -1,2 +1,4 @@
-User-Agent: *
-Disallow: https://bethchapplehair.co.uk/Test/
+User-agent: *
+Disallow: /Test/
+
+Sitemap: https://bethchapplehair.co.uk/sitemap.xml
