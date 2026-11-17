@@ -9,7 +9,7 @@ Living to-do list. Update it as things are done; the dated entries below are the
    - If one exists, **merge** ours into it rather than overwriting it. Keep anything cPanel/LiteSpeed added (e.g. PHP handler lines).
    - If it already has an HTTPS or www redirect, keep **only one** set of redirect rules, or you risk a redirect loop.
    - Many FTP clients hide dotfiles; make sure `.htaccess` actually uploads.
-2. Merge feature branches into the release branch (currently `release/GeneralOnceover`), merge that into `main`, then upload all files (including the new `img/icons/sprite.svg`, `img/icons/instagram.svg`, `img/hba-awards-trophies.webp` and the renamed `img/gallery/*.webp`).
+2. Merge feature branches into the release branch (currently `release/GeneralOnceover`), merge that into `main`, then upload all files (including the new `img/icons/sprite.svg`, `img/icons/instagram.svg`, `img/hba-awards-trophies.webp` and the renamed and new `img/gallery/*.webp`). Don't upload `img/galleryNew/` (originals inbox).
 3. **Delete from the server** (uploading won't remove them): `docs/`, `gallery-scripts.js`, `gallery-styles.css`, `scripts/scripts.js`, `scripts/build.js`, `scripts/start.js`, `img/Archive/`, `img/px-conversions.zip`, the old `img/Logo-*-svg.svg` / `img/favicon-32x32.svg` files, the images deleted on 2026-11-16, and the old `img/gallery/Gallery*.webp` / `img/gallery/Bridal.webp`.
 4. **Smoke test on the live site:**
    - `http://www.bethchapplehair.co.uk/index.html` should 301 to `https://bethchapplehair.co.uk/` in one hop.
@@ -89,6 +89,16 @@ Newest entries first.
 - Cache busting: `consent.js?v=2` (all pages), `gallery.js?v=3`.
 - Tested in headless Chrome: lightbox opens, arrow keys move and wrap, Esc closes, arrow/close icons render; "Show map" loads the map and stores consent; banner Reject and the cookie settings form save correctly.
 - DeepSource results can now be read with `gh` (GitHub CLI, signed in as the repo owner): inline comments via `gh api repos/GmillsWebDev/BethChappleHair/pulls/<n>/comments`. Issues outside a PR's diff only show on the DeepSource dashboard.
+
+### Gallery rebuild: masonry + length filter
+- 30 new photos (originals in `img/galleryNew/`, now git-ignored as an inbox) converted to webp in two sizes: `name.webp` (1000px wide, used by the lightbox) and `name-sm.webp` (500px wide, used in the grid). All metadata stripped (20 originals had GPS location). 96 MB of originals → 6.5 MB.
+- New photo `blonde-pixie-long-fringe` replaces the old square crop `blonde-pixie-cut.webp` (deleted; the `Gallery15.webp` redirect now points to the new file).
+- `gallery.html`: Bootstrap rows replaced by a `<ul class="masonry">` (CSS columns: 2 / 3 / 4 at <768 / 768+ / 1200+). New photos newest first, the 14 older square photos mixed in every third slot. First 8 load eagerly, the rest lazily.
+- Each item carries `data-length` (`long` / `medium` / `short` / `up-do`), `data-colour` (`blonde` / `brunette` / `copper` / `vivid`, space-separated when two apply) and `data-texture` (`curly` / `not-curly`). Only length has a filter for now; colour and texture are there for later.
+- Length filter buttons (`aria-pressed`) plus a live "Showing N … looks" count. Hidden unless JavaScript runs. The URL updates (`gallery.html?length=short`), so a filtered view can be linked to, e.g. from the services page.
+- Lightbox steps only through the photos the current filter shows. Lightbox image now limited to the screen height so tall portrait photos fit.
+- `main.css?v=4`, `gallery.js?v=4`.
+- Tested in Chrome: all 44 images load; each filter shows the right count, pressed state and URL; lightbox inside the "short" filter cycles the 9 short looks and wraps; desktop and mobile screenshots checked.
 
 ## 2026-11-16 — Site overhaul (branch `site-overhaul`)
 

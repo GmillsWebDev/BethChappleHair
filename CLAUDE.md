@@ -17,7 +17,7 @@ Static marketing site for **Beth Chapple Hair**, a self-employed hairdresser in 
 |---|---|
 | `index.html` | Home: hero, About, HBA awards (`#Awards`), gallery preview, Find me / contact, click-to-load map, JSON-LD (`WebSite` + `HairSalon`) |
 | `services.html` | Price list (Bootstrap tabs on desktop, accordion on mobile) |
-| `gallery.html` | Image grid + lightbox (`scripts/gallery.js`) |
+| `gallery.html` | Masonry gallery (`ul.masonry`, CSS columns) with length filter + lightbox (`scripts/gallery.js`). See "Adding gallery photos" below |
 | `policies.html`, `privacy.html`, `cookies.html` | Legal pages. `cookies.html#cookie-settings` holds the consent toggles |
 | `404.html` | Error page. Uses **root-absolute** paths (`/sass/main.css`) because it's served at any URL |
 | `sass/main.css` | **The** stylesheet. Plain CSS (no SCSS source exists), edit directly |
@@ -35,6 +35,11 @@ Static marketing site for **Beth Chapple Hair**, a self-employed hairdresser in 
 - When pages are added or removed, update `sitemap.xml`.
 - Images: `.webp` (convert with Pillow: `python -m pip install --user pillow`; no other image tools on this machine), descriptive kebab-case file names, meaningful `alt` (decorative = `alt=""`), `width`/`height` attributes, `loading="lazy"` below the fold. External links: `target="_blank" rel="noopener"`.
 - British English in copy ("colour", "specialise"). Site copy is first person (Beth).
+
+## Adding gallery photos
+- Originals go in `img/galleryNew/` (git-ignored inbox; never uploaded). Convert with Pillow, applying EXIF orientation and **not** copying metadata (phone photos carry GPS): `name.webp` at 1000px wide (q80) for the lightbox and `name-sm.webp` at 500px wide (q76) for the grid, both in `img/gallery/`.
+- Add an `<li class="masonry__item">` to `gallery.html`: `<a class="galleryItem" href="…/name.webp">` wrapping `<img src="…/name-sm.webp">` with real `width`/`height` and alt text, plus the `.img-overlay` span. Copy an existing item.
+- Tag every item: `data-length` = `long` | `medium` | `short` | `up-do`; `data-colour` = any of `blonde` `brunette` `copper` `vivid` (space-separated); `data-texture` = `curly` | `not-curly`. A new filter value needs a button in `.galleryFilters` and an entry in `labels` in `gallery.js`.
 
 ## Working rules
 - Log each session's changes in `log.md` under History (newest first), and keep its **Open items** section (deployment checklist, waiting on Beth, decisions) up to date.

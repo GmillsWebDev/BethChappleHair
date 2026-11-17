@@ -23,7 +23,7 @@ ErrorDocument 404 /404.html
   RewriteRule ^img/gallery/Gallery6\.webp$ /img/gallery/rose-gold-inverted-bob.webp [L,R=301]
   RewriteRule ^img/gallery/Gallery7\.webp$ /img/gallery/copper-hair-long-waves.webp [L,R=301]
   RewriteRule ^img/gallery/Bridal\.webp$ /img/gallery/bridal-chignon-purple-flowers.webp [L,R=301]
-  RewriteRule ^img/gallery/Gallery15\.webp$ /img/gallery/blonde-pixie-cut.webp [L,R=301]
+  RewriteRule ^img/gallery/Gallery15\.webp$ /img/gallery/blonde-pixie-long-fringe.webp [L,R=301]
   RewriteRule ^img/gallery/Gallery10\.webp$ /img/gallery/copper-auburn-waves.webp [L,R=301]
   RewriteRule ^img/gallery/Gallery14\.webp$ /img/gallery/pastel-pink-textured-crop.webp [L,R=301]
   RewriteRule ^img/gallery/Gallery11\.webp$ /img/gallery/lived-in-blonde-balayage.webp [L,R=301]
