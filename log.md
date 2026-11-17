@@ -34,8 +34,19 @@ Newest entries first.
 - Upload `img/icons/sprite.svg` and `img/icons/instagram.svg`.
 - Delete the old `img/gallery/Gallery*.webp` and `img/gallery/Bridal.webp` from the server (the redirects work either way).
 
+### Google profile and press
+- Added her Google Business Profile share link (`https://share.google/cO5Qji3xQ9lu0HvOi`) to the schema `sameAs`.
+- HBA section links to the Farnham Herald article about her being a finalist. The article calls it the "British Hairdressing Awards"; Beth confirms it was the Hair and Beauty Awards (HBA on the trophy), so the site wording stays as is.
+
+### HBA awards section
+- New photo of both trophies: `img/hba-awards-trophies.webp` (from the supplied `HBA_Awards.jpg`, resized to 1200x800 webp, 146 KB → 70 KB; JPG deleted).
+- HBA content moved into its own row (`#Awards`): trophy photo left, text right on desktop; text then photo on mobile. The portrait of Beth with her certificate (`HBA24.webp`) stays with the "Quality Products / A Little About Me" block.
+- Heading "HBA Finalist" → "HBA Awards".
+- **DRAFT, needs Beth's OK:** added "In 2026 I was proud to be placed 43rd in the UK for Hair Stylist of the Year." (wording taken from the trophy; marked with an HTML comment). Schema `award` now lists both years.
+
 ### Still needs Beth
-- Answers to the services-copy questions (below), reviews/testimonials she's happy to quote, her Google Business Profile URL.
+- Answers to the services-copy questions (below) and reviews/testimonials she's happy to quote.
+- Old Fresha listings are still live: one with the wrong postcode (GU31 7JE) and one at 43 Chapel St, GU32 3DY with a different phone number. She no longer uses Fresha; ask them to remove both.
 
 ## 2026-11-16 — Site overhaul (branch `site-overhaul`)
 
