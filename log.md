@@ -36,6 +36,9 @@ Living to-do list. Update it as things are done; the dated entries below are the
 - Reviews/testimonials she's happy to have quoted (then consider review schema).
 - Old Fresha listings are still live: one with the wrong postcode (GU31 7JE) and one at 43 Chapel St, GU32 3DY with a different phone number. She no longer uses Fresha; ask them to remove both. (Beth has replied with a voice note; not yet gone through.)
 
+- **Review link:** "Leave a review" points at a Google search for now. Replace it with Beth's own link from her Business Profile ("Ask for reviews", looks like `g.page/r/…/review`); marked `TODO` in `index.html`. Then consider a printed QR code for the salon.
+- Update the review count ("from 26 Google reviews") when it changes, and swap in new reviews now and then.
+
 ### To review / decide
 - Page titles and meta descriptions, gallery alt text, cookie policy rewrite, privacy policy edits.
 - Saturday is left out of the schema opening hours (waitlist only). Confirm that's right.
@@ -99,6 +102,13 @@ Newest entries first.
 - Lightbox steps only through the photos the current filter shows. Lightbox image now limited to the screen height so tall portrait photos fit.
 - `main.css?v=4`, `gallery.js?v=4`.
 - Tested in Chrome: all 44 images load; each filter shows the right count, pressed state and URL; lightbox inside the "short" filter cycles the 9 short looks and wraps; desktop and mobile screenshots checked.
+
+### Reviews section (home page)
+- New `#Reviews` section ("What my clients say") between the gallery preview and "Find me": 5.0 from 26 Google reviews (updated by hand), 7 review cards, "Leave a review" and "Read all reviews on Google" buttons.
+- Reviews copied from Google (supplied in `reviews.md`): text exactly as written, names shortened to first name + initial, no dates (relative dates go stale).
+- Layout (revised same day, the masonry version was too long): a scroll-snap carousel at every width, showing 1 card plus a peek on mobile, 2 on tablet and 3 on desktop, with cards in a row the same height. The rating and both buttons sit above the cards. ‹ › arrow buttons on tablet and up come from `scripts/reviews.js` (home page only); they dim at each end and use `aria-disabled` so keyboard focus isn't lost. No auto-rotation. Without JS the row still scrolls by touch or trackpad.
+- No review schema: Google doesn't show stars for reviews a business shows on its own site.
+- `main.css?v=6`, `reviews.js?v=1`.
 
 ## 2026-11-16 — Site overhaul (branch `site-overhaul`)
 

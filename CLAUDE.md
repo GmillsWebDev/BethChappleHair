@@ -15,13 +15,14 @@ Static marketing site for **Beth Chapple Hair**, a self-employed hairdresser in 
 ## Layout
 | Path | Purpose |
 |---|---|
-| `index.html` | Home: hero, About, HBA awards (`#Awards`), gallery preview, Find me / contact, click-to-load map, JSON-LD (`WebSite` + `HairSalon`) |
+| `index.html` | Home: hero, About, HBA awards (`#Awards`), gallery preview, reviews carousel (`#Reviews`, arrows via `scripts/reviews.js`), Find me / contact, click-to-load map, JSON-LD (`WebSite` + `HairSalon`) |
 | `services.html` | Price list (Bootstrap tabs on desktop, accordion on mobile) |
 | `gallery.html` | Masonry gallery (`ul.masonry`, CSS columns) with length filter + lightbox (`scripts/gallery.js`). See "Adding gallery photos" below |
 | `policies.html`, `privacy.html`, `cookies.html` | Legal pages. `cookies.html#cookie-settings` holds the consent toggles |
 | `404.html` | Error page. Uses **root-absolute** paths (`/sass/main.css`) because it's served at any URL |
 | `sass/main.css` | **The** stylesheet. Plain CSS (no SCSS source exists), edit directly |
 | `scripts/consent.js` | Cookie banner, consent storage (`localStorage` key `bch-consent`), GA loader, map gating, settings form |
+| `scripts/reviews.js` | Reviews carousel arrow buttons (home page only). Reviews are hand-copied from Google: text verbatim, first name + initial |
 | `scripts/gallery.js` | Lightbox (keyboard: arrows / Esc) |
 | `sitemap.xml`, `robots.txt`, `site.webmanifest`, `.htaccess` | SEO / hosting config |
 | `img/` | Images (webp). `img/logo.webp` (200x146, shown at 100px) is the site logo; `img/logo.png` is used in schema. `img/icons/` = touch/manifest icons plus `sprite.svg` (UI icons). Gallery images are in `img/gallery/`. `img/og-image.jpg` = social share image |

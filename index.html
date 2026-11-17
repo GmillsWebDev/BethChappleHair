@@ -39,7 +39,7 @@
       integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="sass/main.css?v=4" />
+    <link rel="stylesheet" href="sass/main.css?v=6" />
     <link rel="preload" as="image" href="img/BannerImage.webp" media="(min-width: 426px)" fetchpriority="high" />
     <script type="application/ld+json">
       {
@@ -528,6 +528,63 @@
           </div>
         </div>
       </div>
+      <section id="Reviews" class="container spacer" aria-labelledby="reviewsHeading">
+        <h2 id="reviewsHeading">What my clients say</h2>
+        <div class="reviewsHeader">
+          <p class="reviewsSummary">
+            <span class="stars" aria-hidden="true">★★★★★</span>
+            <!-- Update by hand when the Google rating or count changes -->
+            <strong>5.0</strong> from 26 Google reviews
+          </p>
+          <div class="reviewsActions">
+            <!-- TODO: replace with Beth's own review link from her Google Business Profile ("Ask for reviews") -->
+            <a class="reviewBtn reviewBtn--primary" href="https://www.google.com/search?q=beth+chapple+hair+stylist" target="_blank" rel="noopener">Leave a review</a>
+            <a class="reviewBtn" href="https://share.google/cO5Qji3xQ9lu0HvOi" target="_blank" rel="noopener">Read all reviews on Google</a>
+          </div>
+        </div>
+        <!-- Reviews copied from Google. Keep the text exactly as written; show first name + initial only. -->
+        <div class="reviewsCarousel">
+          <button type="button" class="carouselBtn carouselBtn--prev" aria-label="Previous reviews" aria-controls="reviewsTrack" hidden><svg class="icon" aria-hidden="true" focusable="false"><use href="img/icons/sprite.svg?v=1#i-prev"></use></svg></button>
+          <button type="button" class="carouselBtn carouselBtn--next" aria-label="Next reviews" aria-controls="reviewsTrack" hidden><svg class="icon" aria-hidden="true" focusable="false"><use href="img/icons/sprite.svg?v=1#i-next"></use></svg></button>
+          <div class="reviews" id="reviewsTrack" role="region" aria-label="Client reviews" tabindex="0">
+            <figure class="reviewCard">
+              <p class="reviewCard__stars"><span aria-hidden="true">★★★★★</span><span class="visually-hidden">5 out of 5 stars</span></p>
+              <blockquote class="reviewCard__quote"><p>Beth is the best hairdresser I've ever had! She is so down to earth and friendly and so good at making you feel completely comfortable whilst also making you feel spoilt and well looked after. I have fine, curly hair and I wouldn't trust anyone else to style it. She really understands curly hair and styles it so beautifully. She has also coloured my hair in the past and captured the subtle highlights I was wanting so gorgeously. I would highly recommend Beth to anyone but especially those curly girls!</p></blockquote>
+              <figcaption class="reviewCard__name">Hannah &amp; Sam A. <span>Google review</span></figcaption>
+            </figure>
+            <figure class="reviewCard">
+              <p class="reviewCard__stars"><span aria-hidden="true">★★★★★</span><span class="visually-hidden">5 out of 5 stars</span></p>
+              <blockquote class="reviewCard__quote"><p>Beth has been my hairdresser for many years, and I can’t imagine anyone better. She beautifully cuts my curly hair. I used to struggle with it and was never happy with how it looked, but now the color and cut are perfect. It’s easy to manage and always looks lovely, if I do say so myself. On top of that, she’s a wonderful person, so it’s always a pleasure to visit Beth!</p></blockquote>
+              <figcaption class="reviewCard__name">Jane D. <span>Google review</span></figcaption>
+            </figure>
+            <figure class="reviewCard">
+              <p class="reviewCard__stars"><span aria-hidden="true">★★★★★</span><span class="visually-hidden">5 out of 5 stars</span></p>
+              <blockquote class="reviewCard__quote"><p>Couldn’t recommend Beth more!! Before Beth I had had negative experiences with other salons, and she was able to not only fix their botched work, but make my hair look better than I could have imagined. I wouldn’t go anywhere else now for my hair colouring. She’s super knowledgable, 5 stars!</p></blockquote>
+              <figcaption class="reviewCard__name">Lily M. <span>Google review</span></figcaption>
+            </figure>
+            <figure class="reviewCard">
+              <p class="reviewCard__stars"><span aria-hidden="true">★★★★★</span><span class="visually-hidden">5 out of 5 stars</span></p>
+              <blockquote class="reviewCard__quote"><p>I went into the salon for my appointment with Beth, my hair hidden under a hat and came out showing off a brilliant hairstyle and feeling a million dollars! Beth has broad technical knowledge and pays great attention to detail. She sets herself a high standard which she achieves consistently - 5 Star review. !</p></blockquote>
+              <figcaption class="reviewCard__name">Pauline H. <span>Google review</span></figcaption>
+            </figure>
+            <figure class="reviewCard">
+              <p class="reviewCard__stars"><span aria-hidden="true">★★★★★</span><span class="visually-hidden">5 out of 5 stars</span></p>
+              <blockquote class="reviewCard__quote"><p>I came across Beth a few years ago and haven’t looked back since. She is just brilliant and I trust her 100%. Cut and or colour I walk out happy. Beth is also such a fun person and if she wasn’t’ a hairdresser she could have a career as a stand up comedian.</p></blockquote>
+              <figcaption class="reviewCard__name">Maj-Britt K. <span>Google review</span></figcaption>
+            </figure>
+            <figure class="reviewCard">
+              <p class="reviewCard__stars"><span aria-hidden="true">★★★★★</span><span class="visually-hidden">5 out of 5 stars</span></p>
+              <blockquote class="reviewCard__quote"><p>Beth is a recent national hair &amp; beauty awards finalist, so you know her cut and colour is going to be exceptional. This, combined with her warm welcoming personalty and her ability to understand exactly what you want, makes every visit five star.</p></blockquote>
+              <figcaption class="reviewCard__name">Tobiah T. <span>Google review</span></figcaption>
+            </figure>
+            <figure class="reviewCard">
+              <p class="reviewCard__stars"><span aria-hidden="true">★★★★★</span><span class="visually-hidden">5 out of 5 stars</span></p>
+              <blockquote class="reviewCard__quote"><p>I have followed Beth throughout her career as I trust her completely with my hair. No fuss and such a lovely person. Don’t ever move too far away!!</p></blockquote>
+              <figcaption class="reviewCard__name">Kate G. <span>Google review</span></figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
       <div id="Contact" class="container spacer">
         <div class="row">
           <h2>Find me</h2>
@@ -668,5 +725,6 @@
       crossorigin="anonymous"
       defer
     ></script>
+    <script src="scripts/reviews.js?v=1" defer></script>
   </body>
 </html>
