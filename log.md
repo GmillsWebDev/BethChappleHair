@@ -1,5 +1,49 @@
 # Log
 
+## Open items
+
+Living to-do list. Update it as things are done; the dated entries below are the history.
+
+### Deployment checklist (next upload)
+1. **Check the server's existing `.htaccess`** (cPanel File Manager → public_html, enable "show hidden files").
+   - If one exists, **merge** ours into it rather than overwriting it. Keep anything cPanel/LiteSpeed added (e.g. PHP handler lines).
+   - If it already has an HTTPS or www redirect, keep **only one** set of redirect rules, or you risk a redirect loop.
+   - Many FTP clients hide dotfiles; make sure `.htaccess` actually uploads.
+2. Merge feature branches into the release branch (currently `release/GeneralOnceover`), merge that into `main`, then upload all files (including the new `img/icons/sprite.svg`, `img/icons/instagram.svg`, `img/hba-awards-trophies.webp` and the renamed `img/gallery/*.webp`).
+3. **Delete from the server** (uploading won't remove them): `docs/`, `gallery-scripts.js`, `gallery-styles.css`, `scripts/scripts.js`, `scripts/build.js`, `scripts/start.js`, `img/Archive/`, `img/px-conversions.zip`, the old `img/Logo-*-svg.svg` / `img/favicon-32x32.svg` files, the images deleted on 2026-11-16, and the old `img/gallery/Gallery*.webp` / `img/gallery/Bridal.webp`.
+4. **Smoke test on the live site:**
+   - `http://www.bethchapplehair.co.uk/index.html` should 301 to `https://bethchapplehair.co.uk/` in one hop.
+   - `https://bethchapplehair.co.uk/img/gallery/Gallery2.webp` should 301 to `caramel-honey-balayage.webp`.
+   - `https://bethchapplehair.co.uk/nope` should show the styled 404 page (with footer icons).
+   - Cookie banner appears; Reject leaves no `_ga` cookies; Accept sets them; "Show map" loads the map.
+   - Icons show in the footer, contact block and Instagram link; gallery lightbox arrows/close show and work; services tabs (desktop) and accordion (mobile) work.
+5. If the CSS looks stale, browsers are caching the old file: bump `?v=` on `main.css` in all pages.
+
+### After going live
+- Submit `https://bethchapplehair.co.uk/sitemap.xml` in Google Search Console and request indexing of the home page.
+- Test the home page in Google's Rich Results Test (HairSalon schema).
+- Make sure the Google Business Profile name, address, phone and hours exactly match the site.
+- Expect GA visitor numbers to drop (only consenting visitors are counted now).
+
+### Waiting on Beth
+- **2026 award wording** (draft on the home page, marked `DRAFT` in an HTML comment): "In 2026 I was proud to be placed 43rd in the UK for Hair Stylist of the Year."
+- Services page intro copy per service (colour, balayage/highlights, grey blending, cut & finish, fine/curly hair, treatments). Mention Petersfield only where it reads naturally. Questions sent:
+  1. Is the colour consultation free, and does it include the skin test?
+  2. Beth's approach to fine and curly hair (dry cutting, a particular method, product advice?)
+  3. Are grey blending and "lived-in" colour separate services or covered by existing prices?
+  4. How much to say about gents' cuts and (paused) bridal?
+- Possibly a short FAQ section (skin tests, deposits, parking at the Festival car park), which is also good for search.
+- Reviews/testimonials she's happy to have quoted (then consider review schema).
+- Old Fresha listings are still live: one with the wrong postcode (GU31 7JE) and one at 43 Chapel St, GU32 3DY with a different phone number. She no longer uses Fresha; ask them to remove both. (Beth has replied with a voice note; not yet gone through.)
+
+### To review / decide
+- Page titles and meta descriptions, gallery alt text, cookie policy rewrite, privacy policy edits.
+- Saturday is left out of the schema opening hours (waitlist only). Confirm that's right.
+- Whether to keep the commented-out Bridal tab (and `img/bridal2.webp`) or delete it.
+- "Find me" and "Contact" in the nav both go to `#Contact`; consider merging them.
+
+## History
+
 Newest entries first.
 
 ## 2026-11-17 — SEO tidy-up (branch `feature/SEOcontentUpdate`)
@@ -30,10 +74,6 @@ Newest entries first.
 ### Checked
 - Screenshots of home, gallery and services (desktop and mobile) in headless Chrome: icons match the originals, all images load, no visual changes apart from the new H1 text.
 
-### Deployment additions
-- Upload `img/icons/sprite.svg` and `img/icons/instagram.svg`.
-- Delete the old `img/gallery/Gallery*.webp` and `img/gallery/Bridal.webp` from the server (the redirects work either way).
-
 ### Google profile and press
 - Added her Google Business Profile share link (`https://share.google/cO5Qji3xQ9lu0HvOi`) to the schema `sameAs`.
 - HBA section links to the Farnham Herald article about her being a finalist. The article calls it the "British Hairdressing Awards"; Beth confirms it was the Hair and Beauty Awards (HBA on the trophy), so the site wording stays as is.
@@ -44,9 +84,11 @@ Newest entries first.
 - Heading "HBA Finalist" → "HBA Awards".
 - **DRAFT, needs Beth's OK:** added "In 2026 I was proud to be placed 43rd in the UK for Hair Stylist of the Year." (wording taken from the trophy; marked with an HTML comment). Schema `award` now lists both years.
 
-### Still needs Beth
-- Answers to the services-copy questions (below) and reviews/testimonials she's happy to quote.
-- Old Fresha listings are still live: one with the wrong postcode (GU31 7JE) and one at 43 Chapel St, GU32 3DY with a different phone number. She no longer uses Fresha; ask them to remove both.
+### DeepSource fixes (PR #2)
+- DeepSource JavaScript check failed on `var` usage ("use let or const", "var declarations at top of scope"). Converted `scripts/consent.js` and `scripts/gallery.js` to `let`/`const`, with reassigned state declared at the top of each script.
+- Cache busting: `consent.js?v=2` (all pages), `gallery.js?v=3`.
+- Tested in headless Chrome: lightbox opens, arrow keys move and wrap, Esc closes, arrow/close icons render; "Show map" loads the map and stores consent; banner Reject and the cookie settings form save correctly.
+- DeepSource results can now be read with `gh` (GitHub CLI, signed in as the repo owner): inline comments via `gh api repos/GmillsWebDev/BethChappleHair/pulls/<n>/comments`. Issues outside a PR's diff only show on the DeepSource dashboard.
 
 ## 2026-11-16 — Site overhaul (branch `site-overhaul`)
 
@@ -93,40 +135,4 @@ Newest entries first.
 - Deleted 20 unused images (old logos/banners, GalleryImg2_*, MFW) and the commented-out gallery banner block. Kept the commented Bridal tab + bridal2.webp for when bridal returns.
 
 ### Status
-All work is on branch `site-overhaul` (committed, **not pushed, not live**). `main` still matches the live site.
-
-## Next steps
-
-### Before going live (deployment checklist)
-1. **Check the server's existing `.htaccess`** (cPanel File Manager → public_html, enable "show hidden files").
-   - If one exists, **merge** ours into it rather than overwriting it. Keep anything cPanel/LiteSpeed added (e.g. PHP handler lines).
-   - If it already has an HTTPS or www redirect, keep **only one** set of redirect rules, or you risk a redirect loop.
-   - Many FTP clients hide dotfiles; make sure `.htaccess` actually uploads.
-2. Merge `site-overhaul` into `main` and upload all files.
-3. **Delete from the server** (uploading won't remove them): `docs/`, `gallery-scripts.js`, `gallery-styles.css`, `scripts/scripts.js`, `scripts/build.js`, `scripts/start.js`, `img/Archive/`, `img/px-conversions.zip`, the old `img/Logo-*-svg.svg` / `img/favicon-32x32.svg` files, and the other images deleted in this session.
-4. **Smoke test on the live site:**
-   - `http://www.bethchapplehair.co.uk/index.html` should 301 to `https://bethchapplehair.co.uk/` in one hop.
-   - `https://bethchapplehair.co.uk/nope` should show the styled 404 page.
-   - Cookie banner appears; Reject leaves no `_ga` cookies; Accept sets them; "Show map" loads the map.
-   - Gallery lightbox, services tabs (desktop) and accordion (mobile) work.
-5. If the CSS looks stale, browsers are caching the old file: bump `?v=` on `main.css` in all pages.
-
-### After going live
-- Submit `https://bethchapplehair.co.uk/sitemap.xml` in Google Search Console and request indexing of the home page.
-- Test the home page in Google's Rich Results Test (HairSalon schema).
-- Make sure the Google Business Profile name, address, phone and hours exactly match the site.
-- Expect GA visitor numbers to drop (only consenting visitors are counted now).
-
-### For Beth / Gary to review
-- Page titles and meta descriptions, gallery alt text, cookie policy rewrite, privacy policy edits.
-- Saturday is left out of the schema opening hours (waitlist only). Confirm that's right.
-- Whether to keep the commented-out Bridal tab (and `img/bridal2.webp`) or delete it.
-- "Find me" and "Contact" in the nav both go to `#Contact`; consider merging them.
-
-### Content work (next session)
-- Services page intro copy per service (colour, balayage/highlights, grey blending, cut & finish, fine/curly hair, treatments), mentioning Petersfield. Open questions:
-  1. Is the colour consultation free, and does it include the skin test?
-  2. Beth's approach to fine and curly hair (dry cutting, a particular method, product advice?)
-  3. Are grey blending and "lived-in" colour separate services or covered by existing prices?
-  4. How much to say about gents' cuts and (paused) bridal?
-- Possibly a short FAQ section (skin tests, deposits, parking at the Festival car park), which is also good for search.
+Merged into the release branch `release/GeneralOnceover` via PR #1. **Not live yet**; the live site still matches `main`.

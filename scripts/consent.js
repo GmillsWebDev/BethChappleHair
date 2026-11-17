@@ -9,16 +9,20 @@
 (function () {
   'use strict';
 
-  var GA_ID = 'G-V801EGG6QR';
-  var STORAGE_KEY = 'bch-consent';
-  var CONSENT_VERSION = 1;
+  const GA_ID = 'G-V801EGG6QR';
+  const STORAGE_KEY = 'bch-consent';
+  const CONSENT_VERSION = 1;
 
-  var script = document.currentScript;
-  var policyUrl = new URL('../cookies.html', script ? script.src : location.href).href;
+  // Page state
+  let gaLoaded = false;
+  let banner = null;
+
+  const script = document.currentScript;
+  const policyUrl = new URL('../cookies.html', script ? script.src : location.href).href;
 
   function readConsent() {
     try {
-      var stored = JSON.parse(localStorage.getItem(STORAGE_KEY));
+      const stored = JSON.parse(localStorage.getItem(STORAGE_KEY));
       return stored && stored.version === CONSENT_VERSION ? stored : null;
     } catch (e) {
       return null;
@@ -26,7 +30,7 @@
   }
 
   function saveConsent(choices) {
-    var consent = {
+    const consent = {
       version: CONSENT_VERSION,
       analytics: !!choices.analytics,
       maps: !!choices.maps,
@@ -45,8 +49,6 @@
 
   /* ---------- Google Analytics ---------- */
 
-  var gaLoaded = false;
-
   function enableAnalytics() {
     window['ga-disable-' + GA_ID] = false;
     if (gaLoaded) return;
@@ -57,7 +59,7 @@
     };
     window.gtag('js', new Date());
     window.gtag('config', GA_ID);
-    var tag = document.createElement('script');
+    const tag = document.createElement('script');
     tag.async = true;
     tag.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
     document.head.appendChild(tag);
@@ -65,14 +67,14 @@
 
   function disableAnalytics() {
     window['ga-disable-' + GA_ID] = true;
-    var host = location.hostname;
-    var parts = host.split('.');
-    var domains = ['', host, '.' + host];
-    for (var i = 1; i < parts.length - 1; i++) {
+    const host = location.hostname;
+    const parts = host.split('.');
+    const domains = ['', host, '.' + host];
+    for (let i = 1; i < parts.length - 1; i++) {
       domains.push('.' + parts.slice(i).join('.'));
     }
     document.cookie.split(';').forEach(function (cookie) {
-      var name = cookie.split('=')[0].trim();
+      const name = cookie.split('=')[0].trim();
       if (name === '_ga' || name.indexOf('_ga_') === 0 || name === '_gid' || name === '_gat') {
         domains.forEach(function (domain) {
           document.cookie =
@@ -86,8 +88,8 @@
 
   function setMaps(allowed) {
     document.querySelectorAll('[data-map-consent]').forEach(function (wrapper) {
-      var frame = wrapper.querySelector('iframe');
-      var placeholder = wrapper.querySelector('.mapPlaceholder');
+      const frame = wrapper.querySelector('iframe');
+      const placeholder = wrapper.querySelector('.mapPlaceholder');
       if (!frame) return;
       if (allowed) {
         if (!frame.getAttribute('src')) frame.setAttribute('src', frame.getAttribute('data-src'));
@@ -109,8 +111,6 @@
 
   /* ---------- Banner ---------- */
 
-  var banner = null;
-
   function showBanner() {
     if (banner) return;
     banner = document.createElement('div');
@@ -127,9 +127,9 @@
       '<a href="' + policyUrl + '#cookie-settings">Choose settings</a>' +
       '</div>';
     banner.addEventListener('click', function (event) {
-      var choice = event.target.closest('[data-consent]');
+      const choice = event.target.closest('[data-consent]');
       if (!choice) return;
-      var accept = choice.getAttribute('data-consent') === 'accept';
+      const accept = choice.getAttribute('data-consent') === 'accept';
       saveConsent({ analytics: accept, maps: accept });
     });
     document.body.appendChild(banner);
@@ -145,9 +145,9 @@
   /* ---------- Settings form (cookies.html) and map buttons ---------- */
 
   function initSettingsForm() {
-    var form = document.getElementById('cookieSettingsForm');
+    const form = document.getElementById('cookieSettingsForm');
     if (!form) return;
-    var status = form.querySelector('.consentStatus');
+    const status = form.querySelector('.consentStatus');
 
     function fill(consent) {
       form.elements.analytics.checked = !!(consent && consent.analytics);
@@ -171,14 +171,14 @@
   function initMapButtons() {
     document.querySelectorAll('[data-map-load]').forEach(function (button) {
       button.addEventListener('click', function () {
-        var current = readConsent() || {};
+        const current = readConsent() || {};
         saveConsent({ analytics: !!current.analytics, maps: true });
       });
     });
   }
 
   function init() {
-    var consent = readConsent();
+    const consent = readConsent();
     applyConsent(consent);
     initSettingsForm();
     initMapButtons();

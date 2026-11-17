@@ -15,7 +15,7 @@ Static marketing site for **Beth Chapple Hair**, a self-employed hairdresser in 
 ## Layout
 | Path | Purpose |
 |---|---|
-| `index.html` | Home: hero, About, gallery preview, Find me / contact, click-to-load map, `HairSalon` JSON-LD |
+| `index.html` | Home: hero, About, HBA awards (`#Awards`), gallery preview, Find me / contact, click-to-load map, JSON-LD (`WebSite` + `HairSalon`) |
 | `services.html` | Price list (Bootstrap tabs on desktop, accordion on mobile) |
 | `gallery.html` | Image grid + lightbox (`scripts/gallery.js`) |
 | `policies.html`, `privacy.html`, `cookies.html` | Legal pages. `cookies.html#cookie-settings` holds the consent toggles |
@@ -33,9 +33,9 @@ Static marketing site for **Beth Chapple Hair**, a self-employed hairdresser in 
 - Business facts (prices, hours, phone, address) appear in several places: footers, the JSON-LD in `index.html` (including every price in `hasOfferCatalog`), services tables. Keep them in sync.
 - If consent categories change, bump `CONSENT_VERSION` in `consent.js` and update `cookies.html`.
 - When pages are added or removed, update `sitemap.xml`.
-- Images: `.webp`, descriptive kebab-case file names, meaningful `alt` (decorative = `alt=""`), `width`/`height` attributes, `loading="lazy"` below the fold. External links: `target="_blank" rel="noopener"`.
+- Images: `.webp` (convert with Pillow: `python -m pip install --user pillow`; no other image tools on this machine), descriptive kebab-case file names, meaningful `alt` (decorative = `alt=""`), `width`/`height` attributes, `loading="lazy"` below the fold. External links: `target="_blank" rel="noopener"`.
 - British English in copy ("colour", "specialise"). Site copy is first person (Beth).
 
 ## Working rules
-- Log each session's changes in `log.md` (newest at top).
+- Log each session's changes in `log.md` under History (newest first), and keep its **Open items** section (deployment checklist, waiting on Beth, decisions) up to date.
 - Don't change business facts or policy wording unless asked.
