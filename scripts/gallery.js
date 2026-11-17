@@ -15,10 +15,10 @@
   overlay.setAttribute('aria-modal', 'true');
   overlay.setAttribute('aria-label', 'Image viewer');
   overlay.innerHTML =
-    '<button type="button" id="prevButton" aria-label="Previous image"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>' +
+    '<button type="button" id="prevButton" aria-label="Previous image"><svg class="icon" aria-hidden="true" focusable="false"><use href="img/icons/sprite.svg?v=1#i-prev"></use></svg></button>' +
     '<img alt="" />' +
-    '<button type="button" id="nextButton" aria-label="Next image"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>' +
-    '<button type="button" id="exitButton" aria-label="Close image viewer"><i class="fa fa-times" aria-hidden="true"></i></button>';
+    '<button type="button" id="nextButton" aria-label="Next image"><svg class="icon" aria-hidden="true" focusable="false"><use href="img/icons/sprite.svg?v=1#i-next"></use></svg></button>' +
+    '<button type="button" id="exitButton" aria-label="Close image viewer"><svg class="icon" aria-hidden="true" focusable="false"><use href="img/icons/sprite.svg?v=1#i-close"></use></svg></button>';
   document.body.appendChild(overlay);
 
   var image = overlay.querySelector('img');

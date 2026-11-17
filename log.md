@@ -2,6 +2,41 @@
 
 Newest entries first.
 
+## 2026-11-17 — SEO tidy-up (branch `feature/SEOcontentUpdate`)
+
+### Structured data (`index.html`)
+- JSON-LD is now an `@graph` with a `WebSite` entry (helps Google show "Beth Chapple Hair" as the site name) plus the `HairSalon`.
+- Added `hasOfferCatalog`: every service and price from `services.html`, grouped as on the page. **Prices now live here too; keep them in sync.**
+- `streetAddress` is now just "7-9 Heath Road" (salon name doesn't belong in that field). Added `hasMap` and `currenciesAccepted`.
+- Left out `geo`: the map embed only gives the map's centre point, not the salon's exact position.
+
+### Headings and copy
+- Services H1 "Hair Services & Prices"; gallery H1 "Hair Gallery". Banner H1s scale down on narrow screens.
+- Mobile accordion headers on the services page are now `h2`s (were `p`), styled to look the same.
+- "Please note" is no longer an `h2` (`p.noteHeading`, same look).
+- Home: "natural colour work" links to the services page; "get in touch" links to `#Contact`. Fixed "the Beautiful Normingtons Salon" capital.
+- Footer contact details (all pages) and the "Visit me" block are wrapped in `<address>`.
+
+### Images
+- Gallery images renamed descriptively (e.g. `Gallery2.webp` → `caramel-honey-balayage.webp`). The old URLs 301 to the new ones in `.htaccess`.
+
+### Font Awesome removed
+- The kit script (render-blocking, whole icon library) is gone from all 7 pages. The 10 icons used are now in `img/icons/sprite.svg` (Font Awesome Free 6.5.2 SVGs, CC BY 4.0), used as `<svg class="icon"><use href="img/icons/sprite.svg?v=1#i-phone"></use></svg>`. The Instagram "Follow me" icon uses `img/icons/instagram.svg` as a CSS mask so the gradient hover still works.
+- Contact block icons (home) were CSS `::before` using the FA font; now inline SVGs.
+- Lightbox buttons in `gallery.js` use the sprite.
+- `.htaccess`: SVG MIME type and 1-month caching.
+- Cache busting: `main.css?v=3`, `gallery.js?v=2`.
+
+### Checked
+- Screenshots of home, gallery and services (desktop and mobile) in headless Chrome: icons match the originals, all images load, no visual changes apart from the new H1 text.
+
+### Deployment additions
+- Upload `img/icons/sprite.svg` and `img/icons/instagram.svg`.
+- Delete the old `img/gallery/Gallery*.webp` and `img/gallery/Bridal.webp` from the server (the redirects work either way).
+
+### Still needs Beth
+- Answers to the services-copy questions (below), reviews/testimonials she's happy to quote, her Google Business Profile URL.
+
 ## 2026-11-16 — Site overhaul (branch `site-overhaul`)
 
 ### Performance

@@ -77,6 +77,16 @@ h3 {
   font-weight: 600;
 }
 
+/* Inline SVG icons from img/icons/sprite.svg (Font Awesome Free, CC BY 4.0) */
+.icon {
+  display: inline-block;
+  width: 1.25em;
+  height: 1em;
+  vertical-align: -0.125em;
+  fill: currentColor;
+  overflow: visible;
+}
+
 .navbar-brand img,
 footer .logo img {
   width: 100px;
@@ -143,12 +153,18 @@ main h2::after {
   margin-bottom: 0;
   margin-top: 0;
 }
-.InstaLink .follow i {
-  font-size: 2.3rem;
+.InstaLink .igIcon {
+  display: inline-block;
+  width: 2.3rem;
+  height: 2.3rem;
+  margin: 0.3rem;
+  vertical-align: -0.3rem;
   position: relative;
   top: 0.9rem;
-  padding: 0.3rem;
   z-index: 3;
+  background: #000;
+  -webkit-mask: url(../img/icons/instagram.svg) center / contain no-repeat;
+  mask: url(../img/icons/instagram.svg) center / contain no-repeat;
 }
 .InstaLink .instaName {
   margin-left: 2.6rem;
@@ -158,12 +174,8 @@ main h2::after {
 .InstaLink:hover {
   font-weight: bold;
 }
-.InstaLink:hover i {
-  font-weight: bold;
-  background: -webkit-linear-gradient(rgba(30, 103, 179, 0.8) 0%, rgba(156, 52, 147, 0.8) 30%, rgba(239, 47, 72, 0.8) 66%, rgba(242, 117, 50, 0.8) 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.InstaLink:hover .igIcon {
+  background: linear-gradient(rgba(30, 103, 179, 0.8) 0%, rgba(156, 52, 147, 0.8) 30%, rgba(239, 47, 72, 0.8) 66%, rgba(242, 117, 50, 0.8) 100%);
 }
 
 .gradientBox {
@@ -325,42 +337,10 @@ main h2::after {
 .nonFormContact .contactDetail h3 {
   margin-bottom: 0.01rem !important;
 }
-.nonFormContact .location h3::before {
-  display: inline-block;
-  text-rendering: auto;
-  -webkit-font-smoothing: antialiased;
-  font: var(--fa-font-solid);
+.nonFormContact .contactDetail h3 .icon {
   font-size: 2rem;
-  content: "\f3c5";
   margin-right: 1rem;
-}
-.nonFormContact .phone h3::before {
-  display: inline-block;
-  text-rendering: auto;
-  -webkit-font-smoothing: antialiased;
-  font: var(--fa-font-solid);
-  font-size: 2rem;
-  content: "\f095";
-  margin-right: 1rem;
-}
-.nonFormContact .email h3::before {
-  display: inline-block;
-  text-rendering: auto;
-  -webkit-font-smoothing: antialiased;
-  font: var(--fa-font-solid);
-  font-size: 2rem;
-  content: "@";
-  margin-right: 1rem;
-}
-
-.nonFormContact .online h3::before {
-  display: inline-block;
-  text-rendering: auto;
-  -webkit-font-smoothing: antialiased;
-  font: var(--fa-font-solid);
-  font-size: 2rem;
-  content: "\f109";
-  margin-right: 1rem;
+  vertical-align: -0.35rem;
 }
 
 .nonFormContact a {
@@ -398,7 +378,6 @@ main h2::after {
 .img-wrapper a:focus-visible + .img-overlay {
   opacity: 1;
 }
-.img-overlay i,
 .img-overlay svg {
   color: #fff;
   font-size: 3em;
@@ -528,6 +507,11 @@ main h2::after {
 #ServicesPage .servicesBanner .servicesBannerInner .servicesBannerHeading {
   position: relative;
 }
+/* Banner h1s shrink on narrow screens so longer titles don't overflow */
+.servicesBannerHeading h1,
+.galleryBannerHeading h1 {
+  font-size: clamp(2.5rem, 11vw, 4rem);
+}
 #ServicesPage .servicesBanner .servicesBannerInner .servicesBannerHeading p {
   font-size: 1.3rem;
   font-weight: bold;
@@ -601,6 +585,31 @@ main h2::after {
 }
 #ServicesPage .accordion-item {
   border: none;
+}
+/* Mobile accordion headers are h2s for document structure; keep them looking like plain buttons */
+#ServicesPage .accordion-header {
+  margin-bottom: 0 !important;
+  font-family: inherit;
+  font-size: 1rem;
+}
+#ServicesPage .accordion-header::after {
+  content: none;
+}
+/* "Please note" label: looks like an h2 but isn't a heading */
+.noteHeading {
+  margin-bottom: 2rem;
+  font-family: "Ysabeau Office", sans-serif;
+  font-size: 2em;
+  font-weight: 500;
+  line-height: 1.2;
+}
+.noteHeading::after {
+  content: " ";
+  background: linear-gradient(to right, rgba(30, 103, 179, 0.8) 0%, rgba(156, 52, 147, 0.8) 30%, rgba(239, 47, 72, 0.8) 66%, rgba(242, 117, 50, 0.8) 100%);
+  height: 0.3rem;
+  display: block;
+  width: 6rem;
+  margin-top: 0.3rem;
 }
 #ServicesPage .accordion-body .listbullet {
   margin-bottom: 1rem;
@@ -686,7 +695,7 @@ footer a:hover {
   color: #000;
   text-decoration: none;
 }
-footer i {
+footer .icon {
   margin-right: 0.5rem;
 }
 footer p {

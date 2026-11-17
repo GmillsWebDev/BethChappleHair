@@ -39,75 +39,280 @@
       integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="sass/main.css?v=2" />
+    <link rel="stylesheet" href="sass/main.css?v=3" />
     <link rel="preload" as="image" href="img/BannerImage.webp" media="(min-width: 426px)" fetchpriority="high" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "HairSalon",
-        "@id": "https://bethchapplehair.co.uk/#business",
-        "name": "Beth Chapple Hair",
-        "description": "Hairdresser in Petersfield specialising in natural colour, balayage, grey blending, fine and curly hair.",
-        "url": "https://bethchapplehair.co.uk/",
-        "logo": "https://bethchapplehair.co.uk/img/logo.png",
-        "image": "https://bethchapplehair.co.uk/img/og-image.jpg",
-        "telephone": "+44 7854 441248",
-        "email": "Bethchapplehairstylist@hotmail.com",
-        "priceRange": "££",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Normingtons Salon, 7-9 Heath Road",
-          "addressLocality": "Petersfield",
-          "addressRegion": "Hampshire",
-          "postalCode": "GU31 4JE",
-          "addressCountry": "GB"
-        },
-        "areaServed": {
-          "@type": "City",
-          "name": "Petersfield"
-        },
-        "openingHoursSpecification": [
+        "@graph": [
           {
-            "@type": "OpeningHoursSpecification",
-            "dayOfWeek": "https://schema.org/Wednesday",
-            "opens": "09:00",
-            "closes": "16:00"
+            "@type": "WebSite",
+            "@id": "https://bethchapplehair.co.uk/#website",
+            "name": "Beth Chapple Hair",
+            "url": "https://bethchapplehair.co.uk/",
+            "inLanguage": "en-GB",
+            "publisher": {
+              "@id": "https://bethchapplehair.co.uk/#business"
+            }
           },
           {
-            "@type": "OpeningHoursSpecification",
-            "dayOfWeek": "https://schema.org/Thursday",
-            "opens": "09:00",
-            "closes": "20:00"
+            "@type": "HairSalon",
+            "@id": "https://bethchapplehair.co.uk/#business",
+            "name": "Beth Chapple Hair",
+            "description": "Hairdresser in Petersfield specialising in natural colour, balayage, grey blending, fine and curly hair.",
+            "url": "https://bethchapplehair.co.uk/",
+            "logo": "https://bethchapplehair.co.uk/img/logo.png",
+            "image": "https://bethchapplehair.co.uk/img/og-image.jpg",
+            "telephone": "+44 7854 441248",
+            "email": "Bethchapplehairstylist@hotmail.com",
+            "priceRange": "££",
+            "currenciesAccepted": "GBP",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "7-9 Heath Road",
+              "addressLocality": "Petersfield",
+              "addressRegion": "Hampshire",
+              "postalCode": "GU31 4JE",
+              "addressCountry": "GB"
+            },
+            "hasMap": "https://www.google.com/maps/search/?api=1&query=Normingtons+Hair+%26+Beauty+Petersfield+GU31+4JE",
+            "areaServed": {
+              "@type": "City",
+              "name": "Petersfield"
+            },
+            "openingHoursSpecification": [
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": "https://schema.org/Wednesday",
+                "opens": "09:00",
+                "closes": "16:00"
+              },
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": "https://schema.org/Thursday",
+                "opens": "09:00",
+                "closes": "20:00"
+              }
+            ],
+            "hasOfferCatalog": {
+              "@type": "OfferCatalog",
+              "name": "Hair services",
+              "url": "https://bethchapplehair.co.uk/services.html",
+              "itemListElement": [
+                {
+                  "@type": "OfferCatalog",
+                  "name": "Colour",
+                  "itemListElement": [
+                    {
+                      "@type": "Offer",
+                      "itemOffered": {
+                        "@type": "Service",
+                        "name": "Full head colour (long hair)"
+                      },
+                      "price": "77.00",
+                      "priceCurrency": "GBP"
+                    },
+                    {
+                      "@type": "Offer",
+                      "itemOffered": {
+                        "@type": "Service",
+                        "name": "Full head colour (short hair)"
+                      },
+                      "price": "65.00",
+                      "priceCurrency": "GBP"
+                    },
+                    {
+                      "@type": "Offer",
+                      "itemOffered": {
+                        "@type": "Service",
+                        "name": "Root regrowth"
+                      },
+                      "price": "58.50",
+                      "priceCurrency": "GBP"
+                    },
+                    {
+                      "@type": "Offer",
+                      "itemOffered": {
+                        "@type": "Service",
+                        "name": "Toner"
+                      },
+                      "price": "20.00",
+                      "priceCurrency": "GBP"
+                    }
+                  ]
+                },
+                {
+                  "@type": "OfferCatalog",
+                  "name": "Highlights",
+                  "itemListElement": [
+                    {
+                      "@type": "Offer",
+                      "itemOffered": {
+                        "@type": "Service",
+                        "name": "Full head highlights"
+                      },
+                      "price": "112.50",
+                      "priceCurrency": "GBP"
+                    },
+                    {
+                      "@type": "Offer",
+                      "itemOffered": {
+                        "@type": "Service",
+                        "name": "Half head highlights"
+                      },
+                      "price": "82.50",
+                      "priceCurrency": "GBP"
+                    },
+                    {
+                      "@type": "Offer",
+                      "itemOffered": {
+                        "@type": "Service",
+                        "name": "Partial highlights"
+                      },
+                      "price": "57.00",
+                      "priceCurrency": "GBP"
+                    }
+                  ]
+                },
+                {
+                  "@type": "OfferCatalog",
+                  "name": "Specialised colouring",
+                  "itemListElement": [
+                    {
+                      "@type": "Offer",
+                      "itemOffered": {
+                        "@type": "Service",
+                        "name": "Balayage and toner"
+                      },
+                      "price": "126.00",
+                      "priceCurrency": "GBP"
+                    },
+                    {
+                      "@type": "Offer",
+                      "itemOffered": {
+                        "@type": "Service",
+                        "name": "Half balayage and toner"
+                      },
+                      "price": "99.00",
+                      "priceCurrency": "GBP"
+                    },
+                    {
+                      "@type": "Offer",
+                      "itemOffered": {
+                        "@type": "Service",
+                        "name": "Face frame"
+                      },
+                      "price": "42.50",
+                      "priceCurrency": "GBP"
+                    }
+                  ]
+                },
+                {
+                  "@type": "OfferCatalog",
+                  "name": "Cut and finish",
+                  "itemListElement": [
+                    {
+                      "@type": "Offer",
+                      "itemOffered": {
+                        "@type": "Service",
+                        "name": "Wash, cut and finish"
+                      },
+                      "price": "63.00",
+                      "priceCurrency": "GBP"
+                    },
+                    {
+                      "@type": "Offer",
+                      "itemOffered": {
+                        "@type": "Service",
+                        "name": "Blow dry (long hair)"
+                      },
+                      "price": "43.50",
+                      "priceCurrency": "GBP"
+                    },
+                    {
+                      "@type": "Offer",
+                      "itemOffered": {
+                        "@type": "Service",
+                        "name": "Blow dry (short hair)"
+                      },
+                      "price": "37.00",
+                      "priceCurrency": "GBP"
+                    },
+                    {
+                      "@type": "Offer",
+                      "itemOffered": {
+                        "@type": "Service",
+                        "name": "Hair up"
+                      },
+                      "price": "65.00",
+                      "priceCurrency": "GBP"
+                    },
+                    {
+                      "@type": "Offer",
+                      "itemOffered": {
+                        "@type": "Service",
+                        "name": "Gents cut"
+                      },
+                      "price": "31.50",
+                      "priceCurrency": "GBP"
+                    }
+                  ]
+                },
+                {
+                  "@type": "OfferCatalog",
+                  "name": "Treatments",
+                  "itemListElement": [
+                    {
+                      "@type": "Offer",
+                      "itemOffered": {
+                        "@type": "Service",
+                        "name": "Treatment mask"
+                      },
+                      "price": "15.00",
+                      "priceCurrency": "GBP"
+                    },
+                    {
+                      "@type": "Offer",
+                      "itemOffered": {
+                        "@type": "Service",
+                        "name": "Vitamin Perfection treatment"
+                      },
+                      "price": "13.00",
+                      "priceCurrency": "GBP"
+                    }
+                  ]
+                }
+              ]
+            },
+            "sameAs": [
+              "https://www.instagram.com/bethchapple_hair/",
+              "https://www.facebook.com/profile.php?id=100087504177026"
+            ],
+            "founder": {
+              "@type": "Person",
+              "name": "Beth Chapple",
+              "jobTitle": "Hair Stylist",
+              "award": "Hair and Beauty Awards 2024 finalist"
+            },
+            "potentialAction": {
+              "@type": "ReserveAction",
+              "target": {
+                "@type": "EntryPoint",
+                "urlTemplate": "https://bookings.gettimely.com/bethchapplehair/book",
+                "actionPlatform": [
+                  "https://schema.org/DesktopWebPlatform",
+                  "https://schema.org/MobileWebPlatform"
+                ]
+              },
+              "result": {
+                "@type": "Reservation",
+                "name": "Hair appointment"
+              }
+            }
           }
-        ],
-        "sameAs": [
-          "https://www.instagram.com/bethchapple_hair/",
-          "https://www.facebook.com/profile.php?id=100087504177026"
-        ],
-        "founder": {
-          "@type": "Person",
-          "name": "Beth Chapple",
-          "jobTitle": "Hair Stylist",
-          "award": "Hair and Beauty Awards 2024 finalist"
-        },
-        "potentialAction": {
-          "@type": "ReserveAction",
-          "target": {
-            "@type": "EntryPoint",
-            "urlTemplate": "https://bookings.gettimely.com/bethchapplehair/book",
-            "actionPlatform": [
-              "https://schema.org/DesktopWebPlatform",
-              "https://schema.org/MobileWebPlatform"
-            ]
-          },
-          "result": {
-            "@type": "Reservation",
-            "name": "Hair appointment"
-          }
-        }
+        ]
       }
     </script>
-    <script src="https://kit.fontawesome.com/49598a1ab8.js" crossorigin="anonymous"></script>
 
     <!-- Cookie consent: loads Google Analytics only after the visitor opts in -->
     <script src="scripts/consent.js?v=1" defer></script>
@@ -201,7 +406,7 @@
             <p>Hi, I’m Beth! <br>
             Your Local Specialist for Natural Colour, Fine & Curly Hair in Petersfield.</p>
             <p>With over 17 years of experience in the hair industry, I recently decided to start my own adventure right here in Petersfield. My career has taken me on some incredible journeys—from styling hair on luxury cruise ships while travelling the world to working behind the scenes at Milan Fashion Week.</p>
-            <p>While the catwalks were exciting, my heart has always been at home, helping my lovely local clients feel their best. I specialise in fine hair, curly hair, and natural colour work, ranging from low-maintenance "lived-in" looks to seamless grey blending.</p>
+            <p>While the catwalks were exciting, my heart has always been at home, helping my lovely local clients feel their best. I specialise in fine hair, curly hair, and <a href="services.html">natural colour work</a>, ranging from low-maintenance "lived-in" looks to seamless grey blending.</p>
             <p>For me, it’s about more than just a trim. I love the "magic" of a transformation—how a fresh set of highlights or a simple root touch-up can completely lift your mood. Whether you need a good heart-to-heart or just want to walk out feeling like a new person, I’m here to make sure you leave the chair looking and feeling incredible.</p>
 
           </div>
@@ -214,7 +419,7 @@
             <h3>A Little About Me</h3>
             <p>When I’m not in the salon, I’m a busy mum of two with a very spoiled "furbaby", so I’m always up for a chat about kids or dogs!</p>
             <h3>Ready for a chat?</h3>
-            <p>I’d love to meet you. Please get in touch to book a free colour consultation or just to have a chat about your hair goals.</p>
+            <p>I’d love to meet you. Please <a href="#Contact">get in touch</a> to book a free colour consultation or just to have a chat about your hair goals.</p>
             <h2>HBA Finalist</h2>
             <p>It was an incredible honour to represent Petersfield as a finalist in the 2024 Hair and Beauty Awards (HBA). Being recognised on a national level was a huge milestone in my career and a wonderful reminder of why I love what I do. I am so lucky to have such a supportive community behind me; my amazing clients have cheered me on since day one. Thank you, Petersfield, for making this town feel like home and for being part of this journey with me.</p>
           </div>
@@ -235,7 +440,7 @@
                   <a href="https://www.instagram.com/bethchapple_hair/" target="_blank" rel="noopener">
                     <div>
                       <p class="follow">
-                        <i class="fa-brands fa-instagram" aria-hidden="true"></i>Follow me
+                        <span class="igIcon" aria-hidden="true"></span>Follow me
                       </p>
                       <p class="instaName">@bethchapple_hair</p>
                     </div>
@@ -247,28 +452,28 @@
             <div class="col-sm-12 col-md-3 col-lg-3">
               <div class="galleryImg">
                 <a href="gallery.html">
-                  <img src="img/gallery/Gallery8.webp" alt="Bridal updo with braided detail and baby&#39;s breath flowers in light brown hair" width="670" height="670" loading="lazy" />
+                  <img src="img/gallery/bridal-updo-braid-flowers.webp" alt="Bridal updo with braided detail and baby&#39;s breath flowers in light brown hair" width="670" height="670" loading="lazy" />
                 </a>
               </div>
             </div>
             <div class="col-sm-12 col-md-3 col-lg-3">
               <div class="galleryImg">
                 <a href="gallery.html">
-                  <img src="img/gallery/Gallery2.webp" alt="Warm caramel and honey blonde balayage with loose waves" width="670" height="670" loading="lazy" />
+                  <img src="img/gallery/caramel-honey-balayage.webp" alt="Warm caramel and honey blonde balayage with loose waves" width="670" height="670" loading="lazy" />
                 </a>
               </div>
             </div>
             <div class="col-sm-12 col-md-3 col-lg-3">
               <div class="galleryImg">
                 <a href="gallery.html">
-                  <img src="img/gallery/Gallery3.webp" alt="Long golden blonde hair styled in glossy waves" width="670" height="670" loading="lazy" />
+                  <img src="img/gallery/golden-blonde-glossy-waves.webp" alt="Long golden blonde hair styled in glossy waves" width="670" height="670" loading="lazy" />
                 </a>
               </div>
             </div>
             <div class="col-sm-12 col-md-3 col-lg-3">
               <div class="galleryImg">
                 <a href="gallery.html">
-                  <img src="img/gallery/Gallery4.webp" alt="Brunette low chignon updo with soft face-framing strands" width="670" height="670" loading="lazy" />
+                  <img src="img/gallery/brunette-low-chignon.webp" alt="Brunette low chignon updo with soft face-framing strands" width="670" height="670" loading="lazy" />
                 </a>
               </div>
             </div>
@@ -277,28 +482,28 @@
             <div class="col-sm-12 col-md-3 col-lg-3">
               <div class="galleryImg">
                 <a href="gallery.html">
-                  <img src="img/gallery/Gallery5.webp" alt="Hidden rainbow colour underlayer beneath a messy top bun" width="670" height="670" loading="lazy" />
+                  <img src="img/gallery/hidden-rainbow-colour.webp" alt="Hidden rainbow colour underlayer beneath a messy top bun" width="670" height="670" loading="lazy" />
                 </a>
               </div>
             </div>
             <div class="col-sm-12 col-md-3 col-lg-3">
               <div class="galleryImg">
                 <a href="gallery.html">
-                  <img src="img/gallery/Gallery6.webp" alt="Rooted rose-gold blonde inverted bob" width="670" height="672" loading="lazy" />
+                  <img src="img/gallery/rose-gold-inverted-bob.webp" alt="Rooted rose-gold blonde inverted bob" width="670" height="672" loading="lazy" />
                 </a>
               </div>
             </div>
             <div class="col-sm-12 col-md-3 col-lg-3">
               <div class="galleryImg">
                 <a href="gallery.html">
-                  <img src="img/gallery/Gallery7.webp" alt="Long vibrant copper hair with soft waves" width="670" height="670" loading="lazy" />
+                  <img src="img/gallery/copper-hair-long-waves.webp" alt="Long vibrant copper hair with soft waves" width="670" height="670" loading="lazy" />
                 </a>
               </div>
             </div>
             <div class="col-sm-12 col-md-3 col-lg-3">
               <div class="galleryImg">
                 <a href="gallery.html">
-                  <img src="img/gallery/Bridal.webp" alt="Blonde bridal chignon finished with purple flowers" width="600" height="600" loading="lazy" />
+                  <img src="img/gallery/bridal-chignon-purple-flowers.webp" alt="Blonde bridal chignon finished with purple flowers" width="600" height="600" loading="lazy" />
                 </a>
               </div>
             </div>
@@ -338,20 +543,20 @@
                 <div class="row">
                   <div class="col-sm-12 col-lg-6">
                     <div class="online contactDetail">
-                      <h3>Book Online</h3>
+                      <h3><svg class="icon" aria-hidden="true" focusable="false"><use href="img/icons/sprite.svg?v=1#i-laptop"></use></svg>Book Online</h3>
                       <br>
                       <a href="https://bookings.gettimely.com/bethchapplehair/book" target="_blank" rel="noopener">Book Now</a>
                     </div>
                   </div>
                   <div class="col-sm-12 col-lg-6">
                     <div class="phone contactDetail">
-                      <h3>Phone me</h3>
+                      <h3><svg class="icon" aria-hidden="true" focusable="false"><use href="img/icons/sprite.svg?v=1#i-phone"></use></svg>Phone me</h3>
                       <br /><a href="tel:+447854441248">07854 441 248</a>
                     </div>
                   </div>
                   <div class="col-sm-12 col-lg-6">
                     <div class="email contactDetail">
-                      <h3>Email me</h3>
+                      <h3><svg class="icon" aria-hidden="true" focusable="false"><use href="img/icons/sprite.svg?v=1#i-at"></use></svg>Email me</h3>
                       <br />
                       <a href="mailto:Bethchapplehairstylist@hotmail.com">
                         Email me
@@ -361,11 +566,11 @@
                   <div class="col-sm-12 col-lg-6">
                     <div class="location contactDetail">
 
-                <h3>Visit me</h3>
+                <h3><svg class="icon" aria-hidden="true" focusable="false"><use href="img/icons/sprite.svg?v=1#i-location"></use></svg>Visit me</h3>
                 <br />
-                7-9 Heath Rd,<br />Petersfield<br />GU31 4JE
+                <address class="mb-0">7-9 Heath Rd,<br />Petersfield<br />GU31 4JE</address>
                 <p class="mt-2">
-                  You can find me in the Beautiful Normingtons Salon by the
+                  You can find me in the beautiful Normingtons Salon by the
                   Festival car park
                 </p>
               </div>
@@ -411,26 +616,28 @@
               </div>
             </div>
             <div class="col-sm-12 col-md-4 order-md-3 footerCol">
-              <p>
-                <i class="fa-solid fa-location-dot" aria-hidden="true"></i> 7-9 Heath Rd,
-                Petersfield GU31 4JE
-              </p>
-              <p>
-                <i class="fa-solid fa-phone" aria-hidden="true"></i>
-                <a href="tel:+447854441248">07854 441 248</a>
-              </p>
-              <p>
-                <i class="fa-solid fa-at" aria-hidden="true"></i>
-                <a href="mailto:Bethchapplehairstylist@hotmail.com">Bethchapplehairstylist@hotmail.com</a>
-              </p>
-              <p>
-                <i class="fa-brands fa-instagram" aria-hidden="true"></i>
-                <a href="https://www.instagram.com/bethchapple_hair/" target="_blank" rel="noopener">@bethchapple_hair</a>
-              </p>
-              <p>
-                <i class="fa-brands fa-facebook" aria-hidden="true"></i>
-                <a href="https://www.facebook.com/profile.php?id=100087504177026" target="_blank" rel="noopener">Give me a like</a>
-              </p>
+              <address class="mb-0">
+                <p>
+                  <svg class="icon" aria-hidden="true" focusable="false"><use href="img/icons/sprite.svg?v=1#i-location"></use></svg> 7-9 Heath Rd,
+                  Petersfield GU31 4JE
+                </p>
+                <p>
+                  <svg class="icon" aria-hidden="true" focusable="false"><use href="img/icons/sprite.svg?v=1#i-phone"></use></svg>
+                  <a href="tel:+447854441248">07854 441 248</a>
+                </p>
+                <p>
+                  <svg class="icon" aria-hidden="true" focusable="false"><use href="img/icons/sprite.svg?v=1#i-at"></use></svg>
+                  <a href="mailto:Bethchapplehairstylist@hotmail.com">Bethchapplehairstylist@hotmail.com</a>
+                </p>
+                <p>
+                  <svg class="icon" aria-hidden="true" focusable="false"><use href="img/icons/sprite.svg?v=1#i-instagram"></use></svg>
+                  <a href="https://www.instagram.com/bethchapple_hair/" target="_blank" rel="noopener">@bethchapple_hair</a>
+                </p>
+                <p>
+                  <svg class="icon" aria-hidden="true" focusable="false"><use href="img/icons/sprite.svg?v=1#i-facebook"></use></svg>
+                  <a href="https://www.facebook.com/profile.php?id=100087504177026" target="_blank" rel="noopener">Give me a like</a>
+                </p>
+              </address>
             </div>
           </div>
         </div>
