@@ -114,6 +114,8 @@ Newest entries first.
 - 22 minor findings (dashboard only, none inline): JS-0241 function-expression callbacks (18), JS-0246 string concatenation (2), JS-0118 strict mode inside the wrapper (2). Fixed in `gallery.js` and `reviews.js`, and the same patterns in `consent.js` (likely why PR #2 kept failing after the `var` fix).
 - `window.gtag` deliberately left as a regular function (arrow functions have no `arguments`, which would silently stop GA recording); marked `// skipcq: JS-0241`.
 - `consent.js?v=3`, `gallery.js?v=5`, `reviews.js?v=2`.
+- Second DeepSource pass (13 findings, all `consent.js`, now in the diff): optional chaining (`consent?.maps`), `Boolean(x)` instead of `!!x`, `catch {}` without an unused `e`. The `arguments` push in `window.gtag` is marked `// skipcq: JS-0244` (rest parameters would give gtag.js a plain array, which it ignores). `consent.js?v=4`.
+- Re-tested: GA consent flow, banner, map button, settings form, plus corrupt saved consent (banner shows, no error), saved consent (no banner, form pre-filled) and an outdated consent version (asked again).
 - Re-tested in Chrome: GA loads only after Accept and `dataLayer` holds real Arguments objects; Reject deletes `_ga` cookies and leaves others; map consent, cookie form, lightbox, gallery filters and reviews carousel all pass. No JS errors.
 
 ## 2026-11-16 — Site overhaul (branch `site-overhaul`)

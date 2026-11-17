@@ -23,8 +23,8 @@
   function readConsent() {
     try {
       const stored = JSON.parse(localStorage.getItem(STORAGE_KEY));
-      return stored && stored.version === CONSENT_VERSION ? stored : null;
-    } catch (e) {
+      return stored?.version === CONSENT_VERSION ? stored : null;
+    } catch {
       return null;
     }
   }
@@ -32,13 +32,13 @@
   function saveConsent(choices) {
     const consent = {
       version: CONSENT_VERSION,
-      analytics: !!choices.analytics,
-      maps: !!choices.maps,
+      analytics: Boolean(choices.analytics),
+      maps: Boolean(choices.maps),
       date: new Date().toISOString()
     };
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(consent));
-    } catch (e) {
+    } catch {
       /* storage blocked: honour the choice for this page view only */
     }
     applyConsent(consent);
@@ -54,9 +54,9 @@
     if (gaLoaded) return;
     gaLoaded = true;
     window.dataLayer = window.dataLayer || [];
-    // Must stay a regular function: gtag.js needs the real `arguments` object, which arrow functions don't have.
+    // Must stay a regular function pushing the real `arguments` object: gtag.js ignores plain arrays, so arrow functions / rest parameters would silently break GA.
     window.gtag = function () { // skipcq: JS-0241
-      window.dataLayer.push(arguments);
+      window.dataLayer.push(arguments); // skipcq: JS-0244
     };
     window.gtag('js', new Date());
     window.gtag('config', GA_ID);
@@ -105,9 +105,9 @@
   }
 
   function applyConsent(consent) {
-    if (consent && consent.analytics) enableAnalytics();
+    if (consent?.analytics) enableAnalytics();
     else disableAnalytics();
-    setMaps(!!(consent && consent.maps));
+    setMaps(Boolean(consent?.maps));
   }
 
   /* ---------- Banner ---------- */
@@ -151,8 +151,8 @@
     const status = form.querySelector('.consentStatus');
 
     function fill(consent) {
-      form.elements.analytics.checked = !!(consent && consent.analytics);
-      form.elements.maps.checked = !!(consent && consent.maps);
+      form.elements.analytics.checked = Boolean(consent?.analytics);
+      form.elements.maps.checked = Boolean(consent?.maps);
     }
     fill(readConsent());
 
@@ -173,7 +173,7 @@
     document.querySelectorAll('[data-map-load]').forEach((button) => {
       button.addEventListener('click', () => {
         const current = readConsent() || {};
-        saveConsent({ analytics: !!current.analytics, maps: true });
+        saveConsent({ analytics: Boolean(current.analytics), maps: true });
       });
     });
   }
