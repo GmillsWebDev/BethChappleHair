@@ -57,6 +57,8 @@ Newest entries first.
 - `.htaccess`: the http/www → https redirect now keeps the requested host (so test stays on test); the live behaviour is unchanged.
 - `consent.js`: GA loads only on `bethchapplehair.co.uk`. Now `consent.js?v=5` on all pages.
 - `CLAUDE.md`: new Deployment section.
+- Server checks: there's **no `.htaccess` on the server** (nothing to merge), so the first live deploy also switches on the http → https and www redirects, gzip and caching. The live site currently serves plain http with a 200. The server is LiteSpeed. There's a `.htpasswd` in `public_html`, which the server blocks (403) and the deploy never touches. SSL is a wildcard certificate, and `test.` exists (cPanel placeholder page). Test basic auth simplified to plain `Require valid-user`.
+- GitHub: created the `production` (`main` only) and `test` (`release/**`) environments and set their SSH secrets. The free plan refuses required reviewers and branch protection on a private repo, so the repo was **made public**. `production` now needs an approval, and `main` requires a PR plus both DeepSource checks.
 
 ## 2026-11-17 — SEO tidy-up (branch `feature/SEOcontentUpdate`)
 

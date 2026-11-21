@@ -77,15 +77,13 @@ jobs:
           } >> _site/.htaccess
           if [ -n "$TEST_HTPASSWD_PATH" ]; then
             {
-              echo '# Password protection. /.well-known/ stays open so AutoSSL can renew the certificate.'
-              echo 'SetEnvIf Request_URI "^/\.well-known/" DCV_REQUEST'
+              # Plain basic auth (LiteSpeed-safe). The site uses a wildcard certificate,
+              # so no HTTP certificate validation needs to reach /.well-known/ here.
+              echo '# Password protection'
               echo 'AuthType Basic'
               echo 'AuthName "Beth Chapple Hair - test site"'
               echo "AuthUserFile \"$TEST_HTPASSWD_PATH\""
-              echo '<RequireAny>'
-              echo '  Require env DCV_REQUEST'
-              echo '  Require valid-user'
-              echo '</RequireAny>'
+              echo 'Require valid-user'
             } >> _site/.htaccess
           else
             echo '::warning::TEST_HTPASSWD_PATH is not set, so the test site is not password protected.'
