@@ -4,7 +4,7 @@
 
 Living to-do list. Update it as things are done; the dated entries below are the history.
 
-**Next session:** set up CI/CD (GitHub Actions → Eco Web Hosting: `main` → live, `release/**` → test.bethchapplehair.co.uk). Plan and step-by-step guide in `CICD_plan.md` (git-ignored, local only). Once that's in place, most of the checklist below is handled by the deploy.
+**In progress: CI/CD** (GitHub Actions → Eco Web Hosting over SSH/rsync: `main` → live, `release/**` → test.bethchapplehair.co.uk). Workflow written (branch `feature/CiCdPipeline`); next are the cPanel and GitHub setup steps (backup, server `.htaccess`, test subdomain + AutoSSL, `.htpasswd`, deploy keys, environments, secrets, branch protection), then a dry run. Step-by-step guide in `CICD_plan.md` (git-ignored, local only). Once live, items 1 to 3 of the checklist below are handled by the deploy.
 
 ### Deployment checklist (next upload)
 1. **Check the server's existing `.htaccess`** (cPanel File Manager → public_html, enable "show hidden files").
@@ -50,6 +50,13 @@ Living to-do list. Update it as things are done; the dated entries below are the
 ## History
 
 Newest entries first.
+
+## 2026-11-21 — CI/CD pipeline (branch `feature/CiCdPipeline`)
+- Decisions: SSH is available, so deploys use **rsync** (mirrors the repo, deletes leftovers). Test site password-protected. DeepSource must pass before merging to `main`, and live deploys need a manual approval.
+- New `.github/workflows/deploy.yml`: `main` → production, `release/**` → test. Stages only site files, makes test-only changes (disallow-all robots, `X-Robots-Tag: noindex`, basic auth with `/.well-known/` left open for AutoSSL), checks `DEPLOY_PATH` before an rsync `--delete`, protects server-managed files, queues deploys per target, writes a summary to the run page. Manual runs default to dry run. `actions/checkout` pinned to the v7.0.1 SHA.
+- `.htaccess`: the http/www → https redirect now keeps the requested host (so test stays on test); the live behaviour is unchanged.
+- `consent.js`: GA loads only on `bethchapplehair.co.uk`. Now `consent.js?v=5` on all pages.
+- `CLAUDE.md`: new Deployment section.
 
 ## 2026-11-17 — SEO tidy-up (branch `feature/SEOcontentUpdate`)
 

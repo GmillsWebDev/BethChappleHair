@@ -1,0 +1,174 @@
+# Deploys the site to Eco Web Hosting over SSH (rsync).
+#   push to main        -> production -> https://bethchapplehair.co.uk      (public_html)
+#   push to release/**  -> test       -> https://test.bethchapplehair.co.uk (own folder, noindex, password)
+# Run it by hand from the Actions tab ("Run workflow"); manual runs default to a dry run,
+# which only lists what would be uploaded or deleted.
+# Secrets (same names in both GitHub environments): DEPLOY_HOST, DEPLOY_PORT, DEPLOY_USER,
+# DEPLOY_PATH, DEPLOY_SSH_KEY, DEPLOY_KNOWN_HOSTS; test only: TEST_HTPASSWD_PATH.
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+      - 'release/**'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: Dry run (list changes, upload nothing)
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+# Never run two deploys to the same target at once; queue them instead.
+concurrency:
+  group: deploy-${{ github.ref_name == 'main' && 'production' || 'test' }}
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: github.ref_name == 'main' || startsWith(github.ref_name, 'release/')
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: ${{ github.ref_name == 'main' && 'production' || 'test' }}
+      url: ${{ github.ref_name == 'main' && 'https://bethchapplehair.co.uk' || 'https://test.bethchapplehair.co.uk' }}
+    defaults:
+      run:
+        shell: bash # adds -o pipefail, so a failed rsync | tee still fails the job
+    env:
+      TARGET: ${{ github.ref_name == 'main' && 'production' || 'test' }}
+      DRY_RUN: ${{ inputs.dry_run && 'true' || 'false' }}
+
+    steps:
+      - name: Check out
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Stage site files
+        # Only the website goes up: no repo/tooling files, docs or the originals inbox.
+        run: |
+          mkdir _site
+          rsync -a \
+            --exclude='.git*' \
+            --exclude='.github/' \
+            --exclude='.claude/' \
+            --exclude='.vscode/' \
+            --exclude='*.md' \
+            --exclude='img/galleryNew/' \
+            --exclude='_site/' \
+            ./ _site/
+          test -f _site/index.html
+          test -f _site/.htaccess
+
+      - name: Test site only - block indexing and add password
+        if: env.TARGET == 'test'
+        env:
+          TEST_HTPASSWD_PATH: ${{ secrets.TEST_HTPASSWD_PATH }}
+        run: |
+          printf 'User-agent: *\nDisallow: /\n' > _site/robots.txt
+          {
+            echo ''
+            echo '# ---- Added by the deploy workflow (test site only) ----'
+            echo '<IfModule mod_headers.c>'
+            echo '  Header always set X-Robots-Tag "noindex, nofollow"'
+            echo '</IfModule>'
+          } >> _site/.htaccess
+          if [ -n "$TEST_HTPASSWD_PATH" ]; then
+            {
+              echo '# Password protection. /.well-known/ stays open so AutoSSL can renew the certificate.'
+              echo 'SetEnvIf Request_URI "^/\.well-known/" DCV_REQUEST'
+              echo 'AuthType Basic'
+              echo 'AuthName "Beth Chapple Hair - test site"'
+              echo "AuthUserFile \"$TEST_HTPASSWD_PATH\""
+              echo '<RequireAny>'
+              echo '  Require env DCV_REQUEST'
+              echo '  Require valid-user'
+              echo '</RequireAny>'
+            } >> _site/.htaccess
+          else
+            echo '::warning::TEST_HTPASSWD_PATH is not set, so the test site is not password protected.'
+          fi
+
+      - name: Check deploy settings
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+        # rsync --delete into the wrong folder would wipe it, so refuse anything unexpected.
+        run: |
+          fail() { echo "::error::$1"; exit 1; }
+          for v in DEPLOY_HOST DEPLOY_USER DEPLOY_PATH DEPLOY_SSH_KEY DEPLOY_KNOWN_HOSTS; do
+            [ -n "${!v}" ] || fail "Secret $v is missing from the '$TARGET' environment."
+          done
+          case "$DEPLOY_PATH" in
+            /*/*/*/) ;;
+            *) fail "DEPLOY_PATH must be a full path ending in '/', e.g. /home/user/public_html/" ;;
+          esac
+          if [ "$TARGET" = production ]; then
+            case "$DEPLOY_PATH" in */public_html/) ;; *) fail "Production DEPLOY_PATH must end in /public_html/" ;; esac
+          else
+            case "$DEPLOY_PATH" in *public_html*) fail "Test DEPLOY_PATH must be outside public_html" ;; esac
+            case "$(basename "$DEPLOY_PATH")" in *test*) ;; *) fail "Test DEPLOY_PATH must be the test site's own folder, e.g. /home/user/test.bethchapplehair.co.uk/" ;; esac
+          fi
+
+      - name: Set up SSH
+        env:
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+        run: |
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+
+      - name: Deploy with rsync
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+        # --checksum: only files whose content changed are sent (checkout resets every file's date).
+        # --delete: removes server files that are no longer in the repo, except the protected ones (P rules).
+        run: |
+          flags=(--recursive --links --checksum --compress --delete --itemize-changes
+                 --chmod=D755,F644
+                 --filter='P .well-known/'
+                 --filter='P cgi-bin/'
+                 --filter='P error_log'
+                 --filter='P .user.ini'
+                 --filter='P php.ini'
+                 --filter='P .htpasswd'
+                 --filter='P .ftpquota')
+          [ "$DRY_RUN" = true ] && flags+=(--dry-run)
+          ssh_cmd="ssh -i $HOME/.ssh/deploy_key -p ${DEPLOY_PORT:-22} -o BatchMode=yes -o StrictHostKeyChecking=yes"
+          rsync "${flags[@]}" -e "$ssh_cmd" _site/ "$DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH" | tee rsync.log
+
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo "### Deploy to \`$TARGET\`"
+            echo ''
+            echo "- Commit: \`${GITHUB_SHA::7}\` on \`$GITHUB_REF_NAME\`"
+            echo "- Dry run: $DRY_RUN"
+            if [ -f rsync.log ]; then
+              echo "- Files uploaded/changed: $(grep -c '^<f' rsync.log || true)"
+              echo "- Deleted from server: $(grep -c '^\*deleting' rsync.log || true)"
+              echo ''
+              echo '<details><summary>rsync changes</summary>'
+              echo ''
+              echo '```'
+              head -n 300 rsync.log
+              echo '```'
+              echo '</details>'
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Remove SSH key
+        if: always()
+        run: rm -f ~/.ssh/deploy_key

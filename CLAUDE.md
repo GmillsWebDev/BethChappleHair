@@ -38,6 +38,16 @@ Static marketing site for **Beth Chapple Hair**, a self-employed hairdresser in 
 - **JavaScript style (DeepSource checks every PR):** `'use strict';` at the top of the file (not inside the wrapper), `const`/`let` never `var`, arrow functions for callbacks, template literals instead of `+` concatenation with variables, optional chaining (`a?.b`) instead of `a && a.b`, `Boolean(x)` instead of `!!x`, `catch {` when the error isn't used. Exception: `window.gtag` in `consent.js` must stay a regular `function` pushing the real `arguments` object (gtag.js ignores plain arrays); it carries `// skipcq: JS-0241` and `// skipcq: JS-0244`. Read PR findings with `gh api repos/GmillsWebDev/BethChappleHair/pulls/<n>/comments`; issues outside the diff only show on the DeepSource dashboard.
 - British English in copy ("colour", "specialise"). Site copy is first person (Beth).
 
+## Deployment (GitHub Actions → Eco Web Hosting)
+- `.github/workflows/deploy.yml` deploys over SSH with rsync. Push to `main` → **production** (`public_html`, `https://bethchapplehair.co.uk`, needs a manual approval). Push to `release/**` → **test** (own folder outside `public_html`, `https://test.bethchapplehair.co.uk`). Day to day: `feature/*` → PR into `release/*` → check on test → PR into `main`.
+- rsync `--delete` makes the server match the repo: delete a file from the repo and it goes from the server. Protected (never deleted): `.well-known/`, `cgi-bin/`, `error_log`, `.user.ini`, `php.ini`, `.htpasswd`, `.ftpquota`.
+- Never uploaded: `.git*`, `.github/`, `*.md`, `img/galleryNew/`.
+- Test deploys only: `robots.txt` becomes disallow-all, and `.htaccess` gets `X-Robots-Tag: noindex` plus basic-auth lines (`TEST_HTPASSWD_PATH` secret). GA only loads on `bethchapplehair.co.uk` (`LIVE_HOST` in `consent.js`), so test and local previews aren't counted.
+- Login details are GitHub **environment** secrets (`production`, `test`): `DEPLOY_HOST`, `DEPLOY_PORT`, `DEPLOY_USER`, `DEPLOY_PATH`, `DEPLOY_SSH_KEY`, `DEPLOY_KNOWN_HOSTS`. The workflow refuses a `DEPLOY_PATH` that doesn't look right.
+- "Run workflow" in the Actions tab defaults to a **dry run** (lists uploads/deletes only). Untick it to deploy for real.
+- Rollback: revert the commit on `main` (it redeploys), or re-run an earlier successful run.
+- Server-side `.htaccess` edits are overwritten on every deploy; put them in the repo's `.htaccess`.
+
 ## Adding gallery photos
 - Originals go in `img/galleryNew/` (git-ignored inbox; never uploaded). Convert with Pillow, applying EXIF orientation and **not** copying metadata (phone photos carry GPS): `name.webp` at 1000px wide (q80) for the lightbox and `name-sm.webp` at 500px wide (q76) for the grid, both in `img/gallery/`.
 - Add an `<li class="masonry__item">` to `gallery.html`: `<a class="galleryItem" href="…/name.webp">` wrapping `<img src="…/name-sm.webp">` with real `width`/`height` and alt text, plus the `.img-overlay` span. Copy an existing item.

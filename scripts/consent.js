@@ -12,6 +12,8 @@
   const GA_ID = 'G-V801EGG6QR';
   const STORAGE_KEY = 'bch-consent';
   const CONSENT_VERSION = 1;
+  // GA only runs on the live site, so test.bethchapplehair.co.uk and local previews aren't counted.
+  const LIVE_HOST = 'bethchapplehair.co.uk';
 
   // Page state
   let gaLoaded = false;
@@ -50,6 +52,7 @@
   /* ---------- Google Analytics ---------- */
 
   function enableAnalytics() {
+    if (location.hostname !== LIVE_HOST) return;
     window[`ga-disable-${GA_ID}`] = false;
     if (gaLoaded) return;
     gaLoaded = true;
