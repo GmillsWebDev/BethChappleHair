@@ -34,6 +34,7 @@ Living to-do list. Update it as things are done; the dated entries below are the
   2. Beth's approach to fine and curly hair (dry cutting, a particular method, product advice?)
   3. Are grey blending and "lived-in" colour separate services or covered by existing prices?
   4. How much to say about gents' cuts and (paused) bridal?
+- Is Wet Curl Finish (£10) an add-on or bookable on its own? Is the consultation free for everyone, and only for colour?
 - Possibly a short FAQ section (skin tests, deposits, parking at the Festival car park), which is also good for search.
 - Reviews/testimonials she's happy to have quoted (then consider review schema).
 - Old Fresha listings are still live: one with the wrong postcode (GU31 7JE) and one at 43 Chapel St, GU32 3DY with a different phone number. She no longer uses Fresha; ask them to remove both. (Beth has replied with a voice note; not yet gone through.)
@@ -49,6 +50,11 @@ Living to-do list. Update it as things are done; the dated entries below are the
 ## History
 
 Newest entries first.
+
+## 2026-11-24 — Curly services (branch `feature/CiCdPipeline`)
+- Services page, Cut & Finish: existing prices now under "General", new "Curly" group (curly cut and finish short £68, medium £78, long £88; wet curl finish £10), names and prices from Timely. Also added to the JSON-LD. "Curly" sits above "General".
+- Added from Timely: In-between Colour £42.50, Custom Colour (varies), Colour Consultation (free, as already stated on the home page; Timely lists it as "Consultation" under "Comp" with no price), K18 Molecular Repair £25. JSON-LD updated.
+- "Let's Chat!" button left-aligned.
 
 ## 2026-11-24 — Contact section redesign (branch `feature/CiCdPipeline`)
 - Home `#Contact` rebuilt: gradient-framed "Book an appointment" panel (Book online, phone, email, opening hours) beside "Find me" (address, new Get directions link, map). Stacks on mobile and tablet.
