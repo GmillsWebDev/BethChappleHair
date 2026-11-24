@@ -45,11 +45,18 @@ Living to-do list. Update it as things are done; the dated entries below are the
 - Page titles and meta descriptions, gallery alt text, cookie policy rewrite, privacy policy edits.
 - Saturday is left out of the schema opening hours (waitlist only). Confirm that's right.
 - Whether to keep the commented-out Bridal tab (and `img/bridal2.webp`) or delete it.
-- "Find me" and "Contact" in the nav both go to `#Contact`; consider merging them.
 
 ## History
 
 Newest entries first.
+
+## 2026-11-24 — Contact section redesign (branch `feature/CiCdPipeline`)
+- Home `#Contact` rebuilt: gradient-framed "Book an appointment" panel (Book online, phone, email, opening hours) beside "Find me" (address, new Get directions link, map). Stacks on mobile and tablet.
+- The map stays click-to-load; the placeholder is smaller and no longer grey. "Open in Google Maps" replaced by Get directions.
+- Opening hours now also appear here; keep in sync with the footers and JSON-LD. `main.css?v=7`.
+- Buttons unified as `.siteBtn` (white with a purple frame, main action) and `.siteBtn--secondary` (soft purple fill, dark text), same height, with a 0.3rem radius. Replaces `drawBtn` (hero, services, 404) and `reviewBtn`; the animated outline is gone. Gallery filters squared to match. Cookie and map buttons unchanged.
+- Nav "Find me" (all pages) now goes to `#FindMe`; "Contact" still goes to `#Contact`. Both clear the sticky nav.
+- Footer email wraps instead of overflowing at about 768px.
 
 ## 2026-11-24 — CI/CD server paths (branch `feature/CiCdPipeline`)
 - Found the real folders: each domain has `~/domains/<domain>/public_html`. `~/public_html` is a symlink to the live one. The test folder is separate and holds only `cgi-bin/` and the placeholder page.

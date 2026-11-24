@@ -39,7 +39,7 @@
       integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="sass/main.css?v=6" />
+    <link rel="stylesheet" href="sass/main.css?v=7" />
     <link rel="preload" as="image" href="img/BannerImage.webp" media="(min-width: 426px)" fetchpriority="high" />
     <script type="application/ld+json">
       {
@@ -349,7 +349,7 @@
               <a class="nav-link" href="#About">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#Contact">Find me</a>
+              <a class="nav-link" href="#FindMe">Find me</a>
             </li>
             <li class="nav-item d-none d-md-block">
               <a class="navbar-brand" href="./">
@@ -379,11 +379,8 @@
               <div class="gradientBox flex-child">
                 <h1>Beth Chapple Hair</h1>
                 <h2>Professional and personal hair stylist in Petersfield</h2>
-                <div class="svg-wrapper buttonWrapper">
-                  <a class="drawBtn" href="https://bookings.gettimely.com/bethchapplehair/book" target="_blank" rel="noopener">
-                    <svg height="60" width="190" aria-hidden="true" focusable="false"><rect class="shape" height="60" width="190" /></svg>
-                    <span>Book now</span>
-                  </a>
+                <div class="buttonWrapper">
+                  <a class="siteBtn" href="https://bookings.gettimely.com/bethchapplehair/book" target="_blank" rel="noopener">Book now</a>
                 </div>
               </div>
             </div>
@@ -538,8 +535,8 @@
           </p>
           <div class="reviewsActions">
             <!-- TODO: replace with Beth's own review link from her Google Business Profile ("Ask for reviews") -->
-            <a class="reviewBtn reviewBtn--primary" href="https://www.google.com/search?q=beth+chapple+hair+stylist" target="_blank" rel="noopener">Leave a review</a>
-            <a class="reviewBtn" href="https://share.google/cO5Qji3xQ9lu0HvOi" target="_blank" rel="noopener">Read all reviews on Google</a>
+            <a class="siteBtn" href="https://www.google.com/search?q=beth+chapple+hair+stylist" target="_blank" rel="noopener">Leave a review</a>
+            <a class="siteBtn siteBtn--secondary" href="https://share.google/cO5Qji3xQ9lu0HvOi" target="_blank" rel="noopener">Read all reviews on Google</a>
           </div>
         </div>
         <!-- Reviews copied from Google. Keep the text exactly as written; show first name + initial only. -->
@@ -585,79 +582,53 @@
           </div>
         </div>
       </section>
-      <div id="Contact" class="container spacer">
-        <div class="row">
-          <h2>Find me</h2>
-          <div class="col-sm-12 col-md-6">
-
-            <div class="mapConsent" data-map-consent>
-              <iframe
-                data-src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10042.740914520462!2d-0.9339791!3d51.0034886!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487447318721c7ef%3A0x53a46f1a88b32a72!2sNORMINGTONS%20HAIR%20%26%20BEAUTY!5e0!3m2!1sen!2suk!4v1683996529690!5m2!1sen!2suk"
-                title="Map showing Normingtons Salon, 7-9 Heath Road, Petersfield"
-                style="border: 0"
-                allowfullscreen
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
-                hidden
-              ></iframe>
-              <div class="mapPlaceholder">
-                <p>
-                  The map is provided by Google Maps, which may set its own
-                  cookies, so it only loads if you allow it.
-                </p>
-                <button type="button" class="consentBtn" data-map-load>Show map</button>
-                <p class="mt-3 mb-0">
-                  <a href="https://www.google.com/maps/search/?api=1&amp;query=Normingtons+Hair+%26+Beauty+Petersfield+GU31+4JE" target="_blank" rel="noopener">Open in Google Maps</a>
-                </p>
-              </div>
-            </div>
+      <section id="Contact" class="container spacer contact" aria-labelledby="bookHeading">
+        <div class="contactPanel">
+          <div>
+            <h2 id="bookHeading">Book an appointment</h2>
+            <a class="siteBtn" href="https://bookings.gettimely.com/bethchapplehair/book" target="_blank" rel="noopener">Book online</a>
+            <ul class="contactPanel__links">
+              <li><a class="contactPanel__phone" href="tel:+447854441248"><svg class="icon" aria-hidden="true" focusable="false"><use href="img/icons/sprite.svg?v=1#i-phone"></use></svg><span class="visually-hidden">Phone me: </span>07854 441 248</a></li>
+              <li><a href="mailto:Bethchapplehairstylist@hotmail.com"><svg class="icon" aria-hidden="true" focusable="false"><use href="img/icons/sprite.svg?v=1#i-at"></use></svg>Email me</a></li>
+            </ul>
           </div>
-          <div class="col-sm-12 col-md-6">
-            <div class="nonFormContact">
-              <div class="container">
-                <div class="row">
-                  <div class="col-sm-12 col-lg-6">
-                    <div class="online contactDetail">
-                      <h3><svg class="icon" aria-hidden="true" focusable="false"><use href="img/icons/sprite.svg?v=1#i-laptop"></use></svg>Book Online</h3>
-                      <br>
-                      <a href="https://bookings.gettimely.com/bethchapplehair/book" target="_blank" rel="noopener">Book Now</a>
-                    </div>
-                  </div>
-                  <div class="col-sm-12 col-lg-6">
-                    <div class="phone contactDetail">
-                      <h3><svg class="icon" aria-hidden="true" focusable="false"><use href="img/icons/sprite.svg?v=1#i-phone"></use></svg>Phone me</h3>
-                      <br /><a href="tel:+447854441248">07854 441 248</a>
-                    </div>
-                  </div>
-                  <div class="col-sm-12 col-lg-6">
-                    <div class="email contactDetail">
-                      <h3><svg class="icon" aria-hidden="true" focusable="false"><use href="img/icons/sprite.svg?v=1#i-at"></use></svg>Email me</h3>
-                      <br />
-                      <a href="mailto:Bethchapplehairstylist@hotmail.com">
-                        Email me
-                      </a>
-                    </div>
-                  </div>
-                  <div class="col-sm-12 col-lg-6">
-                    <div class="location contactDetail">
-
-                <h3><svg class="icon" aria-hidden="true" focusable="false"><use href="img/icons/sprite.svg?v=1#i-location"></use></svg>Visit me</h3>
-                <br />
-                <address class="mb-0">7-9 Heath Rd,<br />Petersfield<br />GU31 4JE</address>
-                <p class="mt-2">
-                  You can find me in the beautiful Normingtons Salon by the
-                  Festival car park
-                </p>
-              </div>
-                  </div>
-                </div>
-              </div>
-
-            </div>
+          <div>
+            <h3>Opening hours</h3>
+            <dl class="contactHours">
+              <dt>Wednesday</dt><dd>9am until 4pm</dd>
+              <dt>Thursday</dt><dd>9am until 8pm</dd>
+              <dt>Saturday</dt><dd>wait list only</dd>
+            </dl>
           </div>
-
         </div>
-      </div>
+        <div id="FindMe" class="contactFind">
+          <h2>Find me</h2>
+          <div class="contactFind__details">
+            <div>
+              <address>7-9 Heath Rd,<br />Petersfield<br />GU31 4JE</address>
+              <p>You can find me in the beautiful Normingtons Salon by the Festival car park</p>
+            </div>
+            <a class="siteBtn siteBtn--secondary" href="https://www.google.com/maps/dir/?api=1&amp;destination=Normingtons+Hair+%26+Beauty+Petersfield+GU31+4JE" target="_blank" rel="noopener">Get directions</a>
+          </div>
+          <div class="mapConsent" data-map-consent>
+            <iframe
+              data-src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10042.740914520462!2d-0.9339791!3d51.0034886!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487447318721c7ef%3A0x53a46f1a88b32a72!2sNORMINGTONS%20HAIR%20%26%20BEAUTY!5e0!3m2!1sen!2suk!4v1683996529690!5m2!1sen!2suk"
+              title="Map showing Normingtons Salon, 7-9 Heath Road, Petersfield"
+              allowfullscreen
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              hidden
+            ></iframe>
+            <div class="mapPlaceholder">
+              <p>
+                The map is provided by Google Maps, which may set its own
+                cookies, so it only loads if you allow it.
+              </p>
+              <button type="button" class="consentBtn" data-map-load>Show map</button>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
 
     <footer>

@@ -216,59 +216,8 @@ main h2::after {
   padding: 0.5rem 1rem;
 }
 
-.svg-wrapper {
-  position: relative;
-  width: 190px;
-}
-
 .buttonWrapper {
-  margin-top: 1rem;
-  text-align: center;
-}
-
-.shape {
-  stroke-dasharray: 140 540;
-  stroke-dashoffset: -276;
-  stroke-width: 8px;
-  fill: transparent;
-  stroke: #7c3996;
-  border-bottom: 5px solid black;
-  transition: stroke-width 1s, stroke-dashoffset 1s, stroke-dasharray 1s;
-}
-
-/* Animated outline button: <a class="drawBtn"><svg><rect class="shape"/></svg><span>Label</span></a> */
-.drawBtn {
-  position: relative;
-  display: block;
-  width: 190px;
-  height: 60px;
-  line-height: 60px;
-  margin-bottom: 2rem;
-  text-align: center;
-  font-size: 1.3rem;
-  color: #000;
-  text-decoration: none;
-}
-.drawBtn:visited,
-.drawBtn:hover,
-.drawBtn:active {
-  color: #000;
-  text-decoration: none;
-}
-.drawBtn svg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-}
-.drawBtn span {
-  position: relative;
-}
-.drawBtn:hover .shape,
-.drawBtn:focus-visible .shape {
-  stroke-width: 2px;
-  stroke-dashoffset: 0;
-  stroke-dasharray: 760;
+  margin: 1rem 0 2rem;
 }
 
 .navbar {
@@ -470,64 +419,125 @@ main h2::after {
 
 .reviewsActions {
   display: flex;
+  align-items: center;
   flex-wrap: wrap;
   gap: 0.75rem 1rem;
 }
-.reviewBtn {
+/* Site buttons: purple frame = main action, soft purple fill = secondary */
+.siteBtn {
   display: inline-block;
   padding: 0.6rem 1.4rem;
   border: 2px solid #7c3996;
-  border-radius: 2rem;
+  border-radius: 0.3rem;
   background: #fff;
   color: #000;
+  text-align: center;
   text-decoration: none;
 }
-.reviewBtn:visited {
+.siteBtn:visited {
   color: #000;
 }
-.reviewBtn:hover,
-.reviewBtn:focus-visible {
-  background: #f3ebf6;
-  color: #000;
-}
-.reviewBtn--primary,
-.reviewBtn--primary:visited {
+.siteBtn:hover,
+.siteBtn:active {
   background: #7c3996;
   color: #fff;
 }
-.reviewBtn--primary:hover,
-.reviewBtn--primary:focus-visible {
-  background: #5f2a74;
-  color: #fff;
+.siteBtn--secondary {
+  border-color: #f3ebf6;
+  background: #f3ebf6;
+}
+.siteBtn--secondary:hover,
+.siteBtn--secondary:active {
+  border-color: #e3d3ea;
+  background: #e3d3ea;
+  color: #000;
+}
+.siteBtn:focus-visible {
+  outline: 3px solid #000;
+  outline-offset: 3px;
 }
 
-#Contact iframe {
-  height: 100%;
-  width: 100%;
+/* Home page: booking panel + find me / map */
+.contact {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 3rem;
 }
-
-.nonFormContact {
-  padding: 0 2rem;
+.contact,
+.contactFind {
+  scroll-margin-top: 10rem; /* clears the sticky nav */
 }
-@media screen and (max-width: 768px) {
-  .nonFormContact {
-    padding: 1rem 0;
+.contactPanel {
+  padding: 2rem 1.5rem;
+  border: 8px solid transparent;
+  border-radius: 1em;
+  background:
+    linear-gradient(#fff, #fff) padding-box,
+    linear-gradient(135deg, rgba(30, 103, 179, 0.8) 0%, rgba(156, 52, 147, 0.8) 30%, rgba(239, 47, 72, 0.8) 66%, rgba(242, 117, 50, 0.8) 100%) border-box;
+}
+.contactPanel__links {
+  margin: 1.75rem 0 2rem;
+  padding: 0;
+  list-style: none;
+}
+.contactPanel__links a {
+  display: inline-block;
+  padding: 0.4rem 0;
+}
+.contactPanel__links .icon {
+  width: 1.875rem;
+  margin-right: 0.5rem;
+  color: #000;
+}
+.contactPanel__links .contactPanel__phone {
+  font-family: "Ysabeau Office", sans-serif;
+  font-size: clamp(1.5rem, 7vw, 2rem);
+  line-height: 1.2;
+  white-space: nowrap;
+}
+.contactPanel__phone .icon {
+  font-size: 1.5rem;
+}
+.contactHours {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.4rem 1.5rem;
+  margin: 0;
+}
+.contactHours dd {
+  margin: 0;
+}
+.contactFind {
+  display: flex;
+  flex-direction: column;
+}
+.contactFind__details {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+  margin-bottom: 2rem;
+}
+.contactFind__details > div {
+  flex: 1 1 16rem;
+}
+@media screen and (min-width: 768px) and (max-width: 991.98px) {
+  .contactPanel {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    column-gap: 3rem;
+    padding: 2.5rem;
   }
 }
-.nonFormContact .contactDetail {
-  margin: 1.5rem 0;
-}
-.nonFormContact .contactDetail h3 {
-  margin-bottom: 0.01rem !important;
-}
-.nonFormContact .contactDetail h3 .icon {
-  font-size: 2rem;
-  margin-right: 1rem;
-  vertical-align: -0.35rem;
-}
-
-.nonFormContact a {
-  font-size: 1.1rem;
+@media screen and (min-width: 992px) {
+  .contact {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4rem;
+  }
+  .contactPanel {
+    padding: 2.5rem;
+  }
 }
 
 /* Gallery page: masonry (CSS columns) + length filter */
@@ -549,7 +559,7 @@ main h2::after {
 .filterBtn {
   padding: 0.35rem 1rem;
   border: 2px solid #7c3996;
-  border-radius: 2rem;
+  border-radius: 0.3rem;
   background: #fff;
   color: #000;
   font: inherit;
@@ -941,6 +951,7 @@ footer::before {
   margin-top: 0.3rem;
 }
 footer a {
+  overflow-wrap: anywhere; /* the long email address */
   color: #000;
   text-decoration: underline;
 }
@@ -1096,19 +1107,25 @@ footer .policies p {
 
 /* Click-to-load Google map */
 .mapConsent {
-  position: relative;
-  height: 100%;
-  min-height: 20rem;
+  display: flex;
+  flex: 1 1 auto;
+  min-height: 15rem;
+}
+.mapConsent iframe {
+  width: 100%;
+  border: 0;
 }
 .mapPlaceholder {
   display: flex;
+  flex: 1;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  height: 100%;
-  min-height: 20rem;
-  padding: 2rem;
-  background: #ede9e9;
+  padding: 1.5rem 2rem;
+  background: #f3ebf6;
+}
+.mapConsent [hidden] {
+  display: none;
 }
 .mapPlaceholder p {
   max-width: 26rem;

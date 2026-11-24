@@ -31,7 +31,7 @@ Static marketing site for **Beth Chapple Hair**, a self-employed hairdresser in 
 - Head, nav and footer are copy-pasted into every page (7 files incl. 404). Any change must be repeated in all of them. Nav "active" state is per page.
 - Home links use `./` and `./#Contact` (not `index.html`) so they match the canonical URL `/`. Because of this, preview through a local server (`npx serve .`), not by double-clicking files.
 - **Cache busting:** CSS/JS are cached for a month by `.htaccess`. When you change `main.css`, bump `?v=N` in every page; same for `consent.js` / `gallery.js`.
-- Business facts (prices, hours, phone, address) appear in several places: footers, the JSON-LD in `index.html` (including every price in `hasOfferCatalog`), services tables. Keep them in sync.
+- Business facts (prices, hours, phone, address) appear in several places: footers, the home page contact section (hours, phone, address), the JSON-LD in `index.html` (including every price in `hasOfferCatalog`), services tables. Keep them in sync.
 - If consent categories change, bump `CONSENT_VERSION` in `consent.js` and update `cookies.html`.
 - When pages are added or removed, update `sitemap.xml`.
 - Images: `.webp` (convert with Pillow: `python -m pip install --user pillow`; no other image tools on this machine), descriptive kebab-case file names, meaningful `alt` (decorative = `alt=""`), `width`/`height` attributes, `loading="lazy"` below the fold. External links: `target="_blank" rel="noopener"`.
