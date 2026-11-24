@@ -247,6 +247,12 @@ main h2::after {
   top: 2rem;
 }
 
+/* Home gallery preview: crop portrait photos to squares */
+#Gallery .galleryImg img {
+  aspect-ratio: 1;
+  object-fit: cover;
+  object-position: 50% 25%;
+}
 #Gallery {
   background-color: #dcdcdc;
   background: linear-gradient(180deg, rgb(255, 255, 255) 0%, rgb(220, 220, 220) 10%, rgb(220, 220, 220) 90%, rgb(255, 255, 255) 100%);

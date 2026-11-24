@@ -3,8 +3,8 @@
 Static marketing site for **Beth Chapple Hair**, a self-employed hairdresser in Petersfield, Hampshire (works from Normingtons Salon, 7-9 Heath Rd, GU31 4JE). Live domain: `https://bethchapplehair.co.uk`.
 
 ## Hosting
-- **Eco Web Hosting** (Apache / cPanel). Files are uploaded as-is; there is no build step.
-- `.htaccess` sets the 404 page, gzip and browser caching. If the server already has an `.htaccess` (e.g. an HTTPS redirect added by cPanel), **merge** rather than overwrite.
+- **Eco Web Hosting** (LiteSpeed). GitHub Actions deploys the files as they are; there is no build step.
+- `.htaccess` sets the 404 page, redirects, gzip and browser caching. The repo's copy replaces the server's on every deploy.
 
 ## Stack
 - Plain HTML pages at repo root, no package.json. Edit files directly.
@@ -15,7 +15,7 @@ Static marketing site for **Beth Chapple Hair**, a self-employed hairdresser in 
 ## Layout
 | Path | Purpose |
 |---|---|
-| `index.html` | Home: hero, About, HBA awards (`#Awards`), gallery preview, reviews carousel (`#Reviews`, arrows via `scripts/reviews.js`), Find me / contact, click-to-load map, JSON-LD (`WebSite` + `HairSalon`) |
+| `index.html` | Home: hero, About, HBA awards (`#Awards`), gallery preview, reviews carousel (`#Reviews`, arrows via `scripts/reviews.js`), booking panel (`#Contact`) and Find me (`#FindMe`) with click-to-load map, JSON-LD (`WebSite` + `HairSalon`) |
 | `services.html` | Price list (Bootstrap tabs on desktop, accordion on mobile) |
 | `gallery.html` | Masonry gallery (`ul.masonry`, CSS columns) with length filter + lightbox (`scripts/gallery.js`). See "Adding gallery photos" below |
 | `policies.html`, `privacy.html`, `cookies.html` | Legal pages. `cookies.html#cookie-settings` holds the consent toggles |
@@ -30,6 +30,8 @@ Static marketing site for **Beth Chapple Hair**, a self-employed hairdresser in 
 ## Conventions
 - Head, nav and footer are copy-pasted into every page (7 files incl. 404). Any change must be repeated in all of them. Nav "active" state is per page.
 - Home links use `./` and `./#Contact` (not `index.html`) so they match the canonical URL `/`. Because of this, preview through a local server (`npx serve .`), not by double-clicking files.
+- **Buttons:** `.siteBtn` (white, purple frame) for the main action, `.siteBtn .siteBtn--secondary` (soft purple fill) for the rest; same height, 0.3rem radius. Cookie and map buttons use `.consentBtn`; keep Accept and Reject equally prominent.
+- **Home gallery preview:** 8 photos, cropped to squares in CSS. Keep the looks varied rather than repeating blonde/brunette waves.
 - **Cache busting:** CSS/JS are cached for a month by `.htaccess`. When you change `main.css`, bump `?v=N` in every page; same for `consent.js` / `gallery.js`.
 - Business facts (prices, hours, phone, address) appear in several places: footers, the home page contact section (hours, phone, address), the JSON-LD in `index.html` (including every price in `hasOfferCatalog`), services tables. Keep them in sync.
 - If consent categories change, bump `CONSENT_VERSION` in `consent.js` and update `cookies.html`.
@@ -44,7 +46,7 @@ Static marketing site for **Beth Chapple Hair**, a self-employed hairdresser in 
 - Never uploaded: `.git*`, `.github/`, `*.md`, `img/galleryNew/`.
 - Test deploys only: `robots.txt` becomes disallow-all, and `.htaccess` gets `X-Robots-Tag: noindex` plus basic-auth lines (`TEST_HTPASSWD_PATH` secret). The server is **LiteSpeed**; SSL is a wildcard certificate (`*.bethchapplehair.co.uk`), so subdomains need no AutoSSL. GA only loads on `bethchapplehair.co.uk` (`LIVE_HOST` in `consent.js`), so test and local previews aren't counted.
 - Login details are GitHub **environment** secrets (`production`, `test`): `DEPLOY_HOST`, `DEPLOY_PORT`, `DEPLOY_USER`, `DEPLOY_PATH`, `DEPLOY_SSH_KEY`, `DEPLOY_KNOWN_HOSTS`. The workflow refuses any `DEPLOY_PATH` other than `/home/<user>/domains/<that target's domain>/public_html/`.
-- "Run workflow" in the Actions tab defaults to a **dry run** (lists uploads/deletes only). Untick it to deploy for real.
+- "Run workflow" in the Actions tab defaults to a **dry run** (lists uploads/deletes only). Untick it to deploy for real. The button only appears once the workflow is on `main`; pushes to `release/**` always deploy for real.
 - Rollback: revert the commit on `main` (it redeploys), or re-run an earlier successful run.
 - Server-side `.htaccess` edits are overwritten on every deploy; put them in the repo's `.htaccess`.
 

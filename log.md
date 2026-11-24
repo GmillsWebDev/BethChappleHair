@@ -4,15 +4,12 @@
 
 Living to-do list. Update it as things are done; the dated entries below are the history.
 
-**In progress: CI/CD** (GitHub Actions → Eco Web Hosting over SSH/rsync: `main` → live, `release/**` → test.bethchapplehair.co.uk). Workflow written (branch `feature/CiCdPipeline`); next are the cPanel and GitHub setup steps (backup, server `.htaccess`, test subdomain + AutoSSL, `.htpasswd`, deploy keys, environments, secrets, branch protection), then a dry run. Step-by-step guide in `CICD_plan.md` (git-ignored, local only). Once live, items 1 to 3 of the checklist below are handled by the deploy.
+**In progress: CI/CD** (GitHub Actions → Eco Web Hosting over SSH/rsync: `main` → live, `release/**` → test.bethchapplehair.co.uk). Workflow, server keys, test password, environments, secrets and branch protection are done. **Waiting on Eco support** (host key fingerprint). Then merge `feature/CiCdPipeline` into `release/GeneralOnceover`, which starts a real test deploy. Step-by-step notes in `CICD_plan.md` (git-ignored, local only).
 
-### Deployment checklist (next upload)
-1. **Check the server's existing `.htaccess`** (cPanel File Manager → public_html, enable "show hidden files").
-   - If one exists, **merge** ours into it rather than overwriting it. Keep anything cPanel/LiteSpeed added (e.g. PHP handler lines).
-   - If it already has an HTTPS or www redirect, keep **only one** set of redirect rules, or you risk a redirect loop.
-   - Many FTP clients hide dotfiles; make sure `.htaccess` actually uploads.
-2. Merge feature branches into the release branch (currently `release/GeneralOnceover`), merge that into `main`, then upload all files (including the new `img/icons/sprite.svg`, `img/icons/instagram.svg`, `img/hba-awards-trophies.webp` and the renamed and new `img/gallery/*.webp`). Don't upload `img/galleryNew/` (originals inbox).
-3. **Delete from the server** (uploading won't remove them): `docs/`, `gallery-scripts.js`, `gallery-styles.css`, `scripts/scripts.js`, `scripts/build.js`, `scripts/start.js`, `img/Archive/`, `img/px-conversions.zip`, the old `img/Logo-*-svg.svg` / `img/favicon-32x32.svg` files, the images deleted on 2026-11-16, and the old `img/gallery/Gallery*.webp` / `img/gallery/Bridal.webp`.
+### Deployment checklist (first live deploy)
+1. Download a backup of the live folder.
+2. Check `index.php` and `test/` in the live folder: they aren't in the repo, so the deploy deletes them, along with the other old leftovers.
+3. Test site checked, then PR `release/GeneralOnceover` into `main`. The merge queues a live deploy that waits for approval, and "Run workflow" (dry run) becomes available. Manual runs use the same approval and queue, so to see a dry run first, reject the queued deploy, dry-run `main`, then re-run the deploy.
 4. **Smoke test on the live site:**
    - `http://www.bethchapplehair.co.uk/index.html` should 301 to `https://bethchapplehair.co.uk/` in one hop.
    - `https://bethchapplehair.co.uk/img/gallery/Gallery2.webp` should 301 to `caramel-honey-balayage.webp`.
@@ -51,6 +48,12 @@ Living to-do list. Update it as things are done; the dated entries below are the
 
 Newest entries first.
 
+## 2026-11-24 — Docs check
+- `CLAUDE.md`, `README.md` and the open items above brought up to date with the pipeline, contact section, buttons and home gallery.
+
+## 2026-11-24 — Home gallery preview (branch `feature/CiCdPipeline`)
+- Swapped the caramel balayage and golden blonde waves (looks the full gallery has plenty of) for the short natural curls and the blonde pixie. Swapped the brunette chignon for the lilac undercut (three up-dos was a lot). Portrait photos are cropped to squares in CSS. Still `main.css?v=7` (not deployed yet).
+
 ## 2026-11-24 — Curly services (branch `feature/CiCdPipeline`)
 - Services page, Cut & Finish: existing prices now under "General", new "Curly" group (curly cut and finish short £68, medium £78, long £88; wet curl finish £10), names and prices from Timely. Also added to the JSON-LD. "Curly" sits above "General".
 - Added from Timely: In-between Colour £42.50, Custom Colour (varies), Colour Consultation (free, as already stated on the home page; Timely lists it as "Consultation" under "Comp" with no price), K18 Molecular Repair £25. JSON-LD updated.
@@ -68,7 +71,7 @@ Newest entries first.
 - Found the real folders: each domain has `~/domains/<domain>/public_html`. `~/public_html` is a symlink to the live one. The test folder is separate and holds only `cgi-bin/` and the placeholder page.
 - `deploy.yml`: the path check now accepts only the target's own domain folder (the old check refused any test path containing `public_html`).
 - Test site password file created outside the web folders; `DEPLOY_PATH` (both) and `TEST_HTPASSWD_PATH` secrets set.
-- Both deploy public keys are in the server's `authorized_keys`. An RSA key labelled `test@comment.com` was already there; left alone, needs identifying.
+- Both deploy public keys are in the server's `authorized_keys`.
 - Correction to 2026-11-21: there's no `.htpasswd` in the live `public_html`; `.htpasswd/` is a folder one level up.
 - The live `public_html` has `index.php` (September 2025) and `test/` (February 2026), which aren't in the repo and would be deleted by the first live deploy. Check them first.
 

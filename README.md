@@ -2,7 +2,7 @@
 
 Static website for Beth Chapple Hair, a hairdresser at Normingtons Salon, Petersfield: <https://bethchapplehair.co.uk>
 
-Plain HTML, CSS and a little JavaScript, with no build step. Hosted on Eco Web Hosting (Apache/cPanel); files are uploaded as they are.
+Plain HTML, CSS and a little JavaScript, with no build step. Hosted on Eco Web Hosting. GitHub Actions deploys `release/**` to the test site and `main` to the live site (see `CLAUDE.md`).
 
 ## Preview locally
 
