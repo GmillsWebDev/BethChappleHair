@@ -1,6 +1,6 @@
 # Deploys the site to Eco Web Hosting over SSH (rsync).
-#   push to main        -> production -> https://bethchapplehair.co.uk      (public_html)
-#   push to release/**  -> test       -> https://test.bethchapplehair.co.uk (own folder, noindex, password)
+#   push to main        -> production -> https://bethchapplehair.co.uk      (domains/bethchapplehair.co.uk/public_html)
+#   push to release/**  -> test       -> https://test.bethchapplehair.co.uk (domains/test.bethchapplehair.co.uk/public_html, noindex, password)
 # Run it by hand from the Actions tab ("Run workflow"); manual runs default to a dry run,
 # which only lists what would be uploaded or deleted.
 # Secrets (same names in both GitHub environments): DEPLOY_HOST, DEPLOY_PORT, DEPLOY_USER,
@@ -102,16 +102,16 @@ jobs:
           for v in DEPLOY_HOST DEPLOY_USER DEPLOY_PATH DEPLOY_SSH_KEY DEPLOY_KNOWN_HOSTS; do
             [ -n "${!v}" ] || fail "Secret $v is missing from the '$TARGET' environment."
           done
-          case "$DEPLOY_PATH" in
-            /*/*/*/) ;;
-            *) fail "DEPLOY_PATH must be a full path ending in '/', e.g. /home/user/public_html/" ;;
-          esac
           if [ "$TARGET" = production ]; then
-            case "$DEPLOY_PATH" in */public_html/) ;; *) fail "Production DEPLOY_PATH must end in /public_html/" ;; esac
+            domain=bethchapplehair.co.uk
           else
-            case "$DEPLOY_PATH" in *public_html*) fail "Test DEPLOY_PATH must be outside public_html" ;; esac
-            case "$(basename "$DEPLOY_PATH")" in *test*) ;; *) fail "Test DEPLOY_PATH must be the test site's own folder, e.g. /home/user/test.bethchapplehair.co.uk/" ;; esac
+            domain=test.bethchapplehair.co.uk
           fi
+          case "$DEPLOY_PATH" in
+            *..*) fail "DEPLOY_PATH must not contain '..'" ;;
+            /*/domains/"$domain"/public_html/) ;;
+            *) fail "DEPLOY_PATH for '$TARGET' must be /home/<user>/domains/$domain/public_html/ (with the final slash)" ;;
+          esac
 
       - name: Set up SSH
         env:

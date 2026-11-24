@@ -39,11 +39,11 @@ Static marketing site for **Beth Chapple Hair**, a self-employed hairdresser in 
 - British English in copy ("colour", "specialise"). Site copy is first person (Beth).
 
 ## Deployment (GitHub Actions → Eco Web Hosting)
-- `.github/workflows/deploy.yml` deploys over SSH with rsync. Push to `main` → **production** (`public_html`, `https://bethchapplehair.co.uk`, needs a manual approval). Push to `release/**` → **test** (own folder outside `public_html`, `https://test.bethchapplehair.co.uk`). Day to day: `feature/*` → PR into `release/*` → check on test → PR into `main`.
+- `.github/workflows/deploy.yml` deploys over SSH with rsync. Push to `main` → **production** (`~/domains/bethchapplehair.co.uk/public_html`; `~/public_html` is a symlink to it, `https://bethchapplehair.co.uk`, needs a manual approval). Push to `release/**` → **test** (`~/domains/test.bethchapplehair.co.uk/public_html`, `https://test.bethchapplehair.co.uk`). Day to day: `feature/*` → PR into `release/*` → check on test → PR into `main`.
 - rsync `--delete` makes the server match the repo: delete a file from the repo and it goes from the server. Protected (never deleted): `.well-known/`, `cgi-bin/`, `error_log`, `.user.ini`, `php.ini`, `.htpasswd`, `.ftpquota`.
 - Never uploaded: `.git*`, `.github/`, `*.md`, `img/galleryNew/`.
 - Test deploys only: `robots.txt` becomes disallow-all, and `.htaccess` gets `X-Robots-Tag: noindex` plus basic-auth lines (`TEST_HTPASSWD_PATH` secret). The server is **LiteSpeed**; SSL is a wildcard certificate (`*.bethchapplehair.co.uk`), so subdomains need no AutoSSL. GA only loads on `bethchapplehair.co.uk` (`LIVE_HOST` in `consent.js`), so test and local previews aren't counted.
-- Login details are GitHub **environment** secrets (`production`, `test`): `DEPLOY_HOST`, `DEPLOY_PORT`, `DEPLOY_USER`, `DEPLOY_PATH`, `DEPLOY_SSH_KEY`, `DEPLOY_KNOWN_HOSTS`. The workflow refuses a `DEPLOY_PATH` that doesn't look right.
+- Login details are GitHub **environment** secrets (`production`, `test`): `DEPLOY_HOST`, `DEPLOY_PORT`, `DEPLOY_USER`, `DEPLOY_PATH`, `DEPLOY_SSH_KEY`, `DEPLOY_KNOWN_HOSTS`. The workflow refuses any `DEPLOY_PATH` other than `/home/<user>/domains/<that target's domain>/public_html/`.
 - "Run workflow" in the Actions tab defaults to a **dry run** (lists uploads/deletes only). Untick it to deploy for real.
 - Rollback: revert the commit on `main` (it redeploys), or re-run an earlier successful run.
 - Server-side `.htaccess` edits are overwritten on every deploy; put them in the repo's `.htaccess`.

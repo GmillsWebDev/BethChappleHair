@@ -51,6 +51,14 @@ Living to-do list. Update it as things are done; the dated entries below are the
 
 Newest entries first.
 
+## 2026-11-24 — CI/CD server paths (branch `feature/CiCdPipeline`)
+- Found the real folders: each domain has `~/domains/<domain>/public_html`. `~/public_html` is a symlink to the live one. The test folder is separate and holds only `cgi-bin/` and the placeholder page.
+- `deploy.yml`: the path check now accepts only the target's own domain folder (the old check refused any test path containing `public_html`).
+- Test site password file created outside the web folders; `DEPLOY_PATH` (both) and `TEST_HTPASSWD_PATH` secrets set.
+- Both deploy public keys are in the server's `authorized_keys`. An RSA key labelled `test@comment.com` was already there; left alone, needs identifying.
+- Correction to 2026-11-21: there's no `.htpasswd` in the live `public_html`; `.htpasswd/` is a folder one level up.
+- The live `public_html` has `index.php` (September 2025) and `test/` (February 2026), which aren't in the repo and would be deleted by the first live deploy. Check them first.
+
 ## 2026-11-21 — CI/CD pipeline (branch `feature/CiCdPipeline`)
 - Decisions: SSH is available, so deploys use **rsync** (mirrors the repo, deletes leftovers). Test site password-protected. DeepSource must pass before merging to `main`, and live deploys need a manual approval.
 - New `.github/workflows/deploy.yml`: `main` → production, `release/**` → test. Stages only site files, makes test-only changes (disallow-all robots, `X-Robots-Tag: noindex`, basic auth with `/.well-known/` left open for AutoSSL), checks `DEPLOY_PATH` before an rsync `--delete`, protects server-managed files, queues deploys per target, writes a summary to the run page. Manual runs default to dry run. `actions/checkout` pinned to the v7.0.1 SHA.
