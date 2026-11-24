@@ -4,11 +4,11 @@
 
 Living to-do list. Update it as things are done; the dated entries below are the history.
 
-**In progress: CI/CD** (GitHub Actions → Eco Web Hosting over SSH/rsync: `main` → live, `release/**` → test.bethchapplehair.co.uk). Workflow, server keys, test password, environments, secrets and branch protection are done. **Waiting on Eco support** (host key fingerprint). Then merge `feature/CiCdPipeline` into `release/GeneralOnceover`, which starts a real test deploy. Step-by-step notes in `CICD_plan.md` (git-ignored, local only).
+**In progress: CI/CD** (GitHub Actions → Eco Web Hosting over SSH/rsync: `main` → live, `release/**` → test.bethchapplehair.co.uk). Workflow, server keys, test password, environments, secrets and branch protection are done. Eco confirmed the firewall allows GitHub's runners, and the host key fingerprint is verified. **Paused 2026-11-24; next (planned 2026-11-25):** commit and push `log.md`, then PR and merge `feature/CiCdPipeline` into `release/GeneralOnceover`, which starts a real test deploy. Step-by-step notes in `CICD_plan.md` (git-ignored, local only).
 
 ### Deployment checklist (first live deploy)
 1. Download a backup of the live folder.
-2. Check `index.php` and `test/` in the live folder: they aren't in the repo, so the deploy deletes them, along with the other old leftovers.
+2. Finish the server account checks (see `CICD_plan.md`) and check `index.php` and `test/` in the live folder: they aren't in the repo, so the deploy deletes them, along with the other old leftovers.
 3. Test site checked, then PR `release/GeneralOnceover` into `main`. The merge queues a live deploy that waits for approval, and "Run workflow" (dry run) becomes available. Manual runs use the same approval and queue, so to see a dry run first, reject the queued deploy, dry-run `main`, then re-run the deploy.
 4. **Smoke test on the live site:**
    - `http://www.bethchapplehair.co.uk/index.html` should 301 to `https://bethchapplehair.co.uk/` in one hop.
@@ -47,6 +47,11 @@ Living to-do list. Update it as things are done; the dated entries below are the
 ## History
 
 Newest entries first.
+
+## 2026-11-24 — Server checks before the first deploy
+- Eco support: single key-authenticated SSH connections from GitHub's runners are allowed; repeated failed logins can trigger a temporary block.
+- Host key fingerprint checked from cPanel Terminal on the server: it matches the expected value.
+- Nothing deployed yet. The test merge is planned for 2026-11-25.
 
 ## 2026-11-24 — Docs check
 - `CLAUDE.md`, `README.md` and the open items above brought up to date with the pipeline, contact section, buttons and home gallery.
